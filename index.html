@@ -1743,19 +1743,20 @@
       showToast('Шинэ авлага бүртгэгдлээ');
     }
 
-    if (data.paidAmount >= data.totalAmount && data.email) {
-      setTimeout(() => {
-        showToast(`✅ "${data.customerName}"-д баярлалаа мессеж илгээгдэв`);
-      }, 1500);
-    }
-
-    saveData();
+   saveData();
     renderAll();
     closeModal();
 
     syncToSheets(data, id ? 'update' : 'create');
-  }
 
+    // Бүрэн төлөгдсөн бөгөөд имэйлтэй бол баярлалаа имэйл шууд илгээх
+    if (data.paidAmount >= data.totalAmount && data.email) {
+      setTimeout(() => {
+        sendThankYouEmailNow(data);
+      }, 1000);
+    }
+  }
+  
   function editEntry(id) {
     openModal(id);
   }
@@ -1796,27 +1797,36 @@
     saveData();
     renderAll();
     showToast(`✅ ${entry.customerName} — бүрэн төлөгдсөн`);
-    
+
+    // Эхлээд Sheets-д шинэчлэх
+    syncToSheets(entry, 'update');
+
+    // Дараа баярлалаа имэйл бодитоор илгээх
     if (entry.email) {
       setTimeout(() => {
-        showToast(`📧 "${entry.customerName}"-д баярлалаа мессеж илгээгдэв`);
-      }, 1500);
+        sendThankYouEmailNow(entry);
+      }, 500);
     }
-
-    syncToSheets(entry, 'update');
   }
 
-  function sendReminder(entryId, type) {
+ function sendReminder(entryId, type) {
     const entry = entries.find(e => e.id === entryId);
     if (!entry) return;
     
+    if (!entry.email) {
+      showToast('⚠️ Энэ үйлчлүүлэгч имэйлгүй байна', 'error');
+      return;
+    }
+
     const typeLabels = {
       before: 'Урьдчилсан сануулга',
       today: 'Өнөөдрийн сануулга',
       overdue: '7 хоног хэтэрсэн сануулга'
     };
     
-    showToast(`📧 ${entry.customerName} (${entry.email || entry.phone})-руу ${typeLabels[type]} илгээгдэв`);
+    // Имэйл бодитоор илгээх
+    sendReminderEmailNow(entry, type);
+    showToast(`📧 ${entry.customerName} (${entry.email})-руу ${typeLabels[type]} илгээгдэв`);
     
     entry.lastContact = new Date().toISOString().split('T')[0];
     saveData();
@@ -1827,7 +1837,62 @@
   // ============================================
   // GOOGLE SHEETS СИНК
   // ============================================
+// Шууд баярлалаа имэйл илгээх
+  function sendThankYouEmailNow(entry) {
+    if (!SHEETS_WEBHOOK_URL) {
+      console.log('[DEMO] Имэйл илгээхэд URL хэрэгтэй');
+      showToast('⚠️ Apps Script URL тохируулаагүй', 'error');
+      return;
+    }
 
+    fetch(SHEETS_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({
+        action: 'send_thank_you',
+        data: {
+          id: entry.id,
+          email: entry.email,
+          customerName: entry.customerName,
+          totalAmount: entry.totalAmount
+        }
+      })
+    }).then(() => {
+      showToast(`📧 "${entry.customerName}"-д баярлалаа имэйл илгээгдэв`);
+    }).catch(err => {
+      console.error('Имэйл илгээх алдаа:', err);
+      showToast('⚠️ Имэйл илгээхэд алдаа гарлаа', 'error');
+    });
+  }
+
+  // Шууд сануулга имэйл илгээх
+  function sendReminderEmailNow(entry, type) {
+    if (!SHEETS_WEBHOOK_URL) {
+      console.log('[DEMO] Имэйл илгээхэд URL хэрэгтэй');
+      return;
+    }
+
+    const totalPaid = getTotalPaid(entry);
+    const balance = entry.totalAmount - totalPaid;
+
+    fetch(SHEETS_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({
+        action: 'send_reminder',
+        data: {
+          id: entry.id,
+          email: entry.email,
+          customerName: entry.customerName,
+          balance: balance,
+          dueDate: entry.dueDate,
+          type: type
+        }
+      })
+    }).catch(err => {
+      console.error('Сануулга илгээх алдаа:', err);
+    });
+  }
   function syncToSheets(data, action) {
     if (!SHEETS_WEBHOOK_URL) {
       console.log('[DEMO] Google Sheets холбогдоогүй:', action, data);
