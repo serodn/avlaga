@@ -35,6 +35,13 @@
     --radius: 10px;
     --radius-sm: 6px;
     --header-text: #FFFFFF;
+    /* График (CVD-safe баталгаажсан палитр) */
+    --chart-s1: #2a78d6;
+    --chart-s2: #008300;
+    --age-1: #f0a099;
+    --age-2: #e34948;
+    --age-3: #b8261d;
+    --age-4: #7d150f;
   }
 
   [data-theme="dark"] {
@@ -61,6 +68,12 @@
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
     --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+    --chart-s1: #3987e5;
+    --chart-s2: #199e70;
+    --age-1: #f4b3ac;
+    --age-2: #ee7a70;
+    --age-3: #dd4d42;
+    --age-4: #b83a30;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1029,6 +1042,236 @@
     letter-spacing: 4px;
   }
 
+  /* ============ Analytics Panel ============ */
+  .analytics-panel.open .reminder-body {
+    max-height: 2000px;
+  }
+
+  .analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .analytics-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+  }
+
+  .analytics-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    letter-spacing: 1.5px;
+    color: var(--secondary-light);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  [data-theme="dark"] .analytics-card h4 { color: #A8BFDF; }
+
+  /* Насжилтын тайлан */
+  .aging-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 4px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+
+  .aging-row:hover { background: var(--primary-soft); }
+  .aging-row.active { background: var(--primary-soft); outline: 1px solid var(--primary); }
+
+  .aging-label { width: 118px; font-size: 12px; flex-shrink: 0; }
+
+  .aging-bar-track {
+    flex: 1;
+    height: 14px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .aging-bar { height: 100%; border-radius: 999px; min-width: 0; }
+
+  .aging-val {
+    width: 86px;
+    text-align: right;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  .aging-cnt { width: 46px; font-size: 11px; color: var(--text-muted); text-align: right; flex-shrink: 0; }
+
+  .aging-hint { font-size: 11px; color: var(--text-muted); margin-top: 10px; }
+
+  /* Сарын график */
+  .chart-legend {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: var(--text);
+    flex-wrap: wrap;
+  }
+
+  .legend-chip {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: -1px;
+  }
+
+  #monthlyChart svg { width: 100%; height: auto; display: block; }
+
+  #monthlyChart .grid-line { stroke: var(--border); stroke-width: 1; }
+  #monthlyChart .axis-label { fill: var(--text-muted); font-size: 10px; font-family: 'Rubik', sans-serif; }
+  #monthlyChart .bar { cursor: pointer; }
+  #monthlyChart .bar:hover { opacity: 0.8; }
+
+  #chartTip {
+    position: fixed;
+    pointer-events: none;
+    background: var(--secondary);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    z-index: 300;
+    display: none;
+    box-shadow: var(--shadow-md);
+    white-space: nowrap;
+  }
+
+  /* Топ өртэй үйлчлүүлэгчид */
+  .debtor-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .debtor-item:last-child { border-bottom: none; }
+
+  .debtor-info { flex: 1; min-width: 0; }
+
+  .debtor-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .debtor-sub { font-size: 11.5px; color: var(--text-muted); }
+
+  .debtor-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: var(--danger);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  .debtor-rank {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--info-soft);
+    color: var(--secondary-light);
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  [data-theme="dark"] .debtor-rank { color: #A8BFDF; }
+
+  /* Утасны холбоос */
+  .tel-link { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--text-muted); }
+  .tel-link:hover { color: var(--primary); border-bottom-color: var(--primary); }
+
+  /* Шүүлтүүрийн чип */
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 500;
+    margin-left: 8px;
+  }
+
+  .filter-chip button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+    padding: 0;
+  }
+
+  /* Toast доторх үйлдлийн товч */
+  .toast-action {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    margin-left: 12px;
+    transition: background 0.15s;
+  }
+
+  .toast-action:hover { background: rgba(255,255,255,0.3); }
+
+  #toastMessage { display: flex; align-items: center; justify-content: space-between; }
+
+  /* ============ Хэвлэх загвар ============ */
+  .print-date { display: none; }
+
+  @media print {
+    * { transition: none !important; animation: none !important; }
+    :root, [data-theme="dark"] {
+      --bg: #fff;
+      --surface: #fff;
+      --surface-2: #fff;
+      --text: #000;
+      --text-muted: #444;
+      --border: #999;
+      --pattern: transparent;
+    }
+    body { background: #fff !important; background-image: none !important; }
+    .header { position: static; box-shadow: none; background: #fff; color: #000; border-bottom: 2px solid #000; }
+    .header-actions, .reminder-panel, .analytics-panel, .search-bar, .action-bar-right,
+    .footer, .toast, .clear-search-btn, #chartTip { display: none !important; }
+    .logo-mark { transform: none; border-color: #000; }
+    .stat-card, .table-container { box-shadow: none; break-inside: avoid; }
+    th:last-child, td:last-child { display: none; }
+    thead { background: #fff !important; color: #000 !important; border-bottom: 2px solid #000; }
+    th { color: #000; }
+    tbody tr.row-overdue { background: #f5f5f5; }
+    .print-date { display: block; font-size: 12px; color: #444; margin-bottom: 10px; }
+    .tel-link { border-bottom: none; }
+    .pay-progress { display: none; }
+    a { color: inherit; text-decoration: none; }
+  }
+
   /* ============ Responsive ============ */
   @media (max-width: 900px) {
     .search-bar { grid-template-columns: 1fr 1fr; }
@@ -1155,6 +1398,37 @@
     </div>
   </div>
 
+  <!-- Analytics Panel -->
+  <div class="reminder-panel analytics-panel" id="analyticsPanel">
+    <div class="reminder-header" onclick="toggleAnalytics()">
+      <h3>📊 Тайлан ба шинжилгээ</h3>
+      <div class="reminder-header-right">
+        <span class="reminder-chevron">▼</span>
+      </div>
+    </div>
+    <div class="reminder-body">
+      <div class="analytics-grid">
+        <div class="analytics-card">
+          <h4>Авлагын насжилт</h4>
+          <div id="agingList"></div>
+          <div class="aging-hint">💡 Мөр дээр дарж жагсаалтыг шүүнэ</div>
+        </div>
+        <div class="analytics-card">
+          <h4>Сүүлийн 6 сарын динамик</h4>
+          <div class="chart-legend">
+            <span><span class="legend-chip" style="background:var(--chart-s1)"></span>Шинэ авлага</span>
+            <span><span class="legend-chip" style="background:var(--chart-s2)"></span>Цуглуулсан төлбөр</span>
+          </div>
+          <div id="monthlyChart"></div>
+        </div>
+        <div class="analytics-card">
+          <h4>Топ өртэй үйлчлүүлэгчид</h4>
+          <div id="debtorList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Reminders Panel -->
   <div class="reminder-panel" id="reminderPanel">
     <div class="reminder-header" onclick="toggleReminders()">
@@ -1179,6 +1453,7 @@
         <button class="filter-btn" data-filter="overdue" onclick="filterTable('overdue', this)">Хэтэрсэн</button>
         <button class="filter-btn" data-filter="paid" onclick="filterTable('paid', this)">Төлөгдсөн</button>
       </div>
+      <button class="btn btn-secondary btn-sm" onclick="printReport()" title="Одоогийн жагсаалтыг хэвлэх">🖨️ Хэвлэх</button>
       <button class="btn btn-secondary btn-sm" onclick="exportCSV()" title="Excel-д нээх боломжтой CSV файл татах">📥 CSV</button>
       <button class="btn btn-secondary btn-sm" onclick="exportJSON()" title="Бүх өгөгдлийг нөөцлөх">💾 Нөөцлөх</button>
       <button class="btn btn-secondary btn-sm" onclick="document.getElementById('importFile').click()" title="Нөөц файлаас сэргээх">📂 Сэргээх</button>
@@ -1217,7 +1492,8 @@
     <button class="clear-search-btn" onclick="clearSearch()">✕ Цэвэрлэх</button>
   </div>
 
-  <div class="results-count" id="resultsCount"></div>
+  <div class="print-date" id="printDate"></div>
+  <div class="results-count"><span id="resultsCount"></span><span id="agingChip"></span></div>
 
   <!-- Table -->
   <div class="table-container">
@@ -1336,6 +1612,9 @@
   <div id="toastMessage"></div>
 </div>
 
+<!-- Chart tooltip -->
+<div id="chartTip"></div>
+
 <footer class="footer">
   <span class="pattern">⛯</span>
   Авлага Хянагч
@@ -1354,6 +1633,9 @@
   let currentPayments = []; // Modal-д засаж байгаа төлбөрийн жагсаалт
   let sortState = { key: 'date', dir: 'desc' };
   let autocompleteResults = []; // Autocomplete-ийн одоогийн үр дүн
+  let agingFilter = null;       // Насжилтын шүүлтүүр (null | current | 1-30 | 31-60 | 61-90 | 90+)
+  let lastDeleted = null;       // Устгасныг буцаахад ашиглана
+  const ANALYTICS_KEY = 'avlaga_analytics_open';
 
   // ⚠️ ӨӨРИЙН Google Apps Script URL-ээ ЭНД оруулна
   const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzRUsOOwrHq8Ksf4U3FNzW6tW38uUYgfrHrbhnzSdQqnefLk3Rs9u46YTHrjPgLFLg0/exec';
@@ -1448,6 +1730,14 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
+  }
+
+  // Товч дүн (график тэнхлэгт): 1.2сая, 450мян гэх мэт
+  function compactMNT(v) {
+    if (v >= 1e9) return (v / 1e9).toFixed(1).replace(/\.0$/, '') + 'тэрбум';
+    if (v >= 1e6) return (v / 1e6).toFixed(1).replace(/\.0$/, '') + 'сая';
+    if (v >= 1e3) return Math.round(v / 1e3) + 'мян';
+    return String(Math.round(v));
   }
 
   function getTotalPaid(entry) {
@@ -1770,6 +2060,280 @@
   }
 
   // ============================================
+  // ТАЙЛАН БА ШИНЖИЛГЭЭ
+  // ============================================
+
+  function toggleAnalytics() {
+    const panel = document.getElementById('analyticsPanel');
+    panel.classList.toggle('open');
+    localStorage.setItem(ANALYTICS_KEY, panel.classList.contains('open') ? '1' : '0');
+  }
+
+  function initAnalyticsPanel() {
+    // Анх удаа нээхэд задгай байлгаж танилцуулна
+    if (localStorage.getItem(ANALYTICS_KEY) !== '0') {
+      document.getElementById('analyticsPanel').classList.add('open');
+    }
+  }
+
+  // --- Авлагын насжилт (aging) ---
+
+  const AGING_BUCKETS = [
+    { key: 'current', label: 'Хугацаа болоогүй', color: 'var(--success)' },
+    { key: '1-30',    label: '1–30 хоног',       color: 'var(--age-1)' },
+    { key: '31-60',   label: '31–60 хоног',      color: 'var(--age-2)' },
+    { key: '61-90',   label: '61–90 хоног',      color: 'var(--age-3)' },
+    { key: '90+',     label: '90+ хоног',        color: 'var(--age-4)' },
+  ];
+
+  function getAgingBucket(entry) {
+    const balance = entry.totalAmount - getTotalPaid(entry);
+    if (balance <= 0) return null;
+    const today = new Date().toISOString().split('T')[0];
+    const d = daysBetween(entry.dueDate, today);
+    if (d <= 0) return 'current';
+    if (d <= 30) return '1-30';
+    if (d <= 60) return '31-60';
+    if (d <= 90) return '61-90';
+    return '90+';
+  }
+
+  function renderAging() {
+    const listEl = document.getElementById('agingList');
+    const sums = {}, counts = {};
+    AGING_BUCKETS.forEach(b => { sums[b.key] = 0; counts[b.key] = 0; });
+
+    entries.forEach(e => {
+      const bucket = getAgingBucket(e);
+      if (!bucket) return;
+      sums[bucket] += e.totalAmount - getTotalPaid(e);
+      counts[bucket]++;
+    });
+
+    const max = Math.max(...AGING_BUCKETS.map(b => sums[b.key]), 1);
+    const hasAny = AGING_BUCKETS.some(b => sums[b.key] > 0);
+
+    if (!hasAny) {
+      listEl.innerHTML = '<div class="payment-empty">Төлөгдөөгүй үлдэгдэл байхгүй байна 🎉</div>';
+      return;
+    }
+
+    listEl.innerHTML = AGING_BUCKETS.map(b => {
+      const pct = Math.round((sums[b.key] / max) * 100);
+      const active = agingFilter === b.key ? ' active' : '';
+      return `
+        <div class="aging-row${active}" onclick="setAgingFilter('${b.key}')" title="Дарж шүүх">
+          <span class="aging-label">${b.label}</span>
+          <div class="aging-bar-track"><div class="aging-bar" style="width:${pct}%;background:${b.color}"></div></div>
+          <span class="aging-val">${formatCurrency(sums[b.key])}</span>
+          <span class="aging-cnt">${counts[b.key]} бүрт.</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function setAgingFilter(bucket) {
+    agingFilter = agingFilter === bucket ? null : bucket;
+    renderAging();
+    renderTable();
+    if (agingFilter) {
+      document.getElementById('dataTable').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  function clearAgingFilter() {
+    agingFilter = null;
+    renderAging();
+    renderTable();
+  }
+
+  function renderAgingChip() {
+    const chipEl = document.getElementById('agingChip');
+    if (!agingFilter) {
+      chipEl.innerHTML = '';
+      return;
+    }
+    const bucket = AGING_BUCKETS.find(b => b.key === agingFilter);
+    chipEl.innerHTML = `<span class="filter-chip">Насжилт: ${bucket.label}<button onclick="clearAgingFilter()" title="Шүүлтүүр арилгах">×</button></span>`;
+  }
+
+  // --- Сүүлийн 6 сарын динамик график ---
+
+  function getMonthlyData() {
+    const months = [];
+    const now = new Date();
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      months.push({ key, label: `${d.getMonth() + 1}сар`, created: 0, collected: 0 });
+    }
+    const byKey = new Map(months.map(m => [m.key, m]));
+
+    entries.forEach(e => {
+      const mk = (e.date || '').slice(0, 7);
+      if (byKey.has(mk)) byKey.get(mk).created += e.totalAmount || 0;
+
+      if (e.payments && e.payments.length > 0) {
+        e.payments.forEach(p => {
+          const pk = (p.date || '').slice(0, 7);
+          if (byKey.has(pk)) byKey.get(pk).collected += p.amount || 0;
+        });
+      } else if (e.paidAmount > 0) {
+        // Хуучин өгөгдөл: төлбөрийн түүхгүй бол бүртгэсэн сард нь тооцно
+        if (byKey.has(mk)) byKey.get(mk).collected += e.paidAmount;
+      }
+    });
+
+    return months;
+  }
+
+  function niceCeil(v) {
+    if (v <= 0) return 1;
+    const p = Math.pow(10, Math.floor(Math.log10(v)));
+    const n = v / p;
+    const f = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+    return f * p;
+  }
+
+  function renderMonthlyChart() {
+    const el = document.getElementById('monthlyChart');
+    const months = getMonthlyData();
+    const maxVal = Math.max(...months.map(m => Math.max(m.created, m.collected)));
+
+    if (maxVal <= 0) {
+      el.innerHTML = '<div class="payment-empty">Сүүлийн 6 сард өгөгдөл байхгүй байна</div>';
+      return;
+    }
+
+    const W = 520, H = 210;
+    const mL = 52, mR = 8, mT = 12, mB = 26;
+    const plotW = W - mL - mR, plotH = H - mT - mB;
+    const yMax = niceCeil(maxVal);
+    const groupW = plotW / months.length;
+    const barW = Math.min(26, groupW * 0.3);
+    const baseY = mT + plotH;
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Сүүлийн 6 сарын шинэ авлага ба цуглуулсан төлбөр">`;
+
+    // Хэвтээ шугам ба тэнхлэгийн утга
+    for (let i = 0; i <= 3; i++) {
+      const val = yMax * i / 3;
+      const y = baseY - plotH * i / 3;
+      svg += `<line class="grid-line" x1="${mL}" y1="${y}" x2="${W - mR}" y2="${y}"/>`;
+      svg += `<text class="axis-label" x="${mL - 6}" y="${y + 3}" text-anchor="end">${compactMNT(val)}</text>`;
+    }
+
+    // Дээд тал нь 4px дугуйрсан багана
+    function barPath(x, y, w, h) {
+      const r = Math.min(4, h, w / 2);
+      if (h <= 0) return '';
+      return `M${x},${y + r} Q${x},${y} ${x + r},${y} H${x + w - r} Q${x + w},${y} ${x + w},${y + r} V${y + h} H${x} Z`;
+    }
+
+    months.forEach((m, i) => {
+      const cx = mL + groupW * i + groupW / 2;
+      const h1 = (m.created / yMax) * plotH;
+      const h2 = (m.collected / yMax) * plotH;
+      const x1 = cx - barW - 1, x2 = cx + 1;
+
+      if (h1 > 0) svg += `<path class="bar" d="${barPath(x1, baseY - h1, barW, h1)}" fill="var(--chart-s1)" data-tip="${m.label} • Шинэ авлага: ${formatCurrency(m.created)}"/>`;
+      if (h2 > 0) svg += `<path class="bar" d="${barPath(x2, baseY - h2, barW, h2)}" fill="var(--chart-s2)" data-tip="${m.label} • Цуглуулсан: ${formatCurrency(m.collected)}"/>`;
+      svg += `<text class="axis-label" x="${cx}" y="${H - 8}" text-anchor="middle">${m.label}</text>`;
+    });
+
+    svg += '</svg>';
+    el.innerHTML = svg;
+  }
+
+  // График tooltip
+  function initChartTooltip() {
+    const tip = document.getElementById('chartTip');
+    document.addEventListener('mousemove', (e) => {
+      const target = e.target.closest('[data-tip]');
+      if (target) {
+        tip.textContent = target.getAttribute('data-tip');
+        tip.style.display = 'block';
+        const pad = 14;
+        let x = e.clientX + pad, y = e.clientY - 30;
+        const rect = tip.getBoundingClientRect();
+        if (x + rect.width > window.innerWidth - 8) x = e.clientX - rect.width - pad;
+        if (y < 8) y = e.clientY + pad;
+        tip.style.left = x + 'px';
+        tip.style.top = y + 'px';
+      } else {
+        tip.style.display = 'none';
+      }
+    });
+  }
+
+  // --- Топ өртэй үйлчлүүлэгчид ---
+
+  function renderTopDebtors() {
+    const listEl = document.getElementById('debtorList');
+    const map = new Map();
+
+    entries.forEach(e => {
+      const balance = e.totalAmount - getTotalPaid(e);
+      if (balance <= 0) return;
+      const key = e.customerName.toLowerCase().trim();
+      if (!map.has(key)) {
+        map.set(key, { name: e.customerName, phone: e.phone, balance: 0, count: 0 });
+      }
+      const c = map.get(key);
+      c.balance += balance;
+      c.count++;
+      if (e.phone) c.phone = e.phone;
+    });
+
+    const top = Array.from(map.values()).sort((a, b) => b.balance - a.balance).slice(0, 5);
+
+    if (top.length === 0) {
+      listEl.innerHTML = '<div class="payment-empty">Өртэй үйлчлүүлэгч байхгүй байна 🎉</div>';
+      return;
+    }
+
+    listEl.innerHTML = top.map((c, i) => `
+      <div class="debtor-item">
+        <span class="debtor-rank">${i + 1}</span>
+        <div class="debtor-info">
+          <div class="debtor-name">${escapeHtml(c.name)}</div>
+          <div class="debtor-sub"><a class="tel-link" href="tel:${escapeHtml(c.phone)}">${escapeHtml(c.phone)}</a> • ${c.count} бүртгэл</div>
+        </div>
+        <span class="debtor-amount">${formatCurrency(c.balance)}</span>
+        <button class="btn-icon" onclick="filterByCustomer(${i})" title="Жагсаалтаас харах">🔍</button>
+      </div>
+    `).join('');
+
+    // Индексээр хандахын тулд хадгална
+    renderTopDebtors.current = top;
+  }
+
+  function filterByCustomer(index) {
+    const c = (renderTopDebtors.current || [])[index];
+    if (!c) return;
+    document.getElementById('searchText').value = c.name;
+    renderTable();
+    document.getElementById('dataTable').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function renderAnalytics() {
+    renderAging();
+    renderMonthlyChart();
+    renderTopDebtors();
+  }
+
+  // --- Хэвлэх ---
+
+  function printReport() {
+    const filtered = getFilteredEntries();
+    const now = new Date();
+    const dateStr = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
+    document.getElementById('printDate').textContent =
+      `Авлагын тайлан — хэвлэсэн: ${dateStr} • ${filtered.length} бүртгэл`;
+    window.print();
+  }
+
+  // ============================================
   // ХАЙЛТ БА ШҮҮЛТҮҮР
   // ============================================
 
@@ -1779,6 +2343,11 @@
     // Статусын шүүлтүүр
     if (currentFilter !== 'all') {
       result = result.filter(e => getStatus(e) === currentFilter);
+    }
+
+    // Насжилтын шүүлтүүр (тайлангаас)
+    if (agingFilter) {
+      result = result.filter(e => getAgingBucket(e) === agingFilter);
     }
 
     // Текстээр хайх (нэр, утас, имэйл, бараа)
@@ -1898,6 +2467,7 @@
     // Үр дүнгийн тоо
     countEl.textContent = `${filtered.length} / ${entries.length} бүртгэл`;
     updateSortArrows();
+    renderAgingChip();
 
     if (filtered.length === 0) {
       tbody.innerHTML = '<tr><td colspan="9" data-label=""><div class="empty-state"><div class="icon">📭</div><h3>Бүртгэл олдсонгүй</h3><p>Хайлтын нөхцлийг өөрчилнө үү эсвэл шинэ авлага нэмнэ үү.</p></div></td></tr>';
@@ -1918,7 +2488,7 @@
           <td data-label="Огноо">${formatDate(entry.date)}</td>
           <td data-label="Үйлчлүүлэгч" class="customer-cell">
             <strong>${escapeHtml(entry.customerName)}</strong>
-            <span class="sub">${escapeHtml(entry.phone)}${entry.email ? ' • ' + escapeHtml(entry.email) : ''}</span>
+            <span class="sub"><a class="tel-link" href="tel:${escapeHtml(entry.phone)}" title="Залгах">${escapeHtml(entry.phone)}</a>${entry.email ? ' • ' + escapeHtml(entry.email) : ''}</span>
           </td>
           <td data-label="Бараа">${escapeHtml(entry.product)}</td>
           <td data-label="Нийт" class="num"><span class="amount">${formatCurrency(entry.totalAmount)}</span></td>
@@ -1931,8 +2501,9 @@
           <td data-label="Статус">${getStatusBadge(entry)}</td>
           <td data-label="">
             <div class="actions-cell">
+              ${balance > 0 ? `<button class="btn-icon" onclick="quickAddPayment('${entry.id}')" title="Төлбөр бүртгэх">💰</button>` : ''}
               <button class="btn-icon" onclick="editEntry('${entry.id}')" title="Засах">✏️</button>
-              <button class="btn-icon" onclick="markPaid('${entry.id}')" title="Бүрэн төлөгдсөн">✓</button>
+              ${balance > 0 ? `<button class="btn-icon" onclick="markPaid('${entry.id}')" title="Бүрэн төлөгдсөн">✓</button>` : ''}
               <button class="btn-icon" onclick="deleteEntry('${entry.id}')" title="Устгах">🗑️</button>
             </div>
           </td>
@@ -2167,10 +2738,34 @@
 
   function deleteEntry(id) {
     if (!confirm('Энэ бүртгэлийг устгахдаа итгэлтэй байна уу?')) return;
-    entries = entries.filter(e => e.id !== id);
+    const index = entries.findIndex(e => e.id === id);
+    if (index < 0) return;
+    lastDeleted = { entry: entries[index], index };
+    entries.splice(index, 1);
     saveData();
     renderAll();
-    showToast('Бүртгэл устгагдлаа');
+    showToast('Бүртгэл устгагдлаа', 'success', { label: '↩️ Буцаах', fn: undoDelete });
+  }
+
+  function undoDelete() {
+    if (!lastDeleted) return;
+    entries.splice(Math.min(lastDeleted.index, entries.length), 0, lastDeleted.entry);
+    lastDeleted = null;
+    saveData();
+    renderAll();
+    showToast('✓ Бүртгэл сэргээгдлээ');
+  }
+
+  // Хүснэгтээс шууд төлбөр бүртгэх: засах цонх нээгээд төлбөрийн хэсэг рүү очно
+  function quickAddPayment(id) {
+    openModal(id);
+    setTimeout(() => {
+      const section = document.getElementById('paymentHistorySection');
+      if (section.style.display !== 'none') {
+        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('newPaymentAmount').focus();
+      }
+    }, 250);
   }
 
   function markPaid(id) {
@@ -2321,14 +2916,25 @@
   // ============================================
 
   let toastTimer = null;
+  let toastAction = null;
 
-  function showToast(message, type = 'success') {
+  function runToastAction() {
+    if (toastAction) toastAction();
+    toastAction = null;
+    document.getElementById('toast').classList.remove('active');
+    if (toastTimer) clearTimeout(toastTimer);
+  }
+
+  function showToast(message, type = 'success', action = null) {
     const toast = document.getElementById('toast');
     const msg = document.getElementById('toastMessage');
-    msg.textContent = message;
+    toastAction = action ? action.fn : null;
+    msg.innerHTML = `<span>${escapeHtml(message)}</span>` +
+      (action ? `<button class="toast-action" onclick="runToastAction()">${escapeHtml(action.label)}</button>` : '');
     toast.className = 'toast active' + (type === 'error' ? ' error' : '');
     if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('active'), 3500);
+    // Үйлдэлтэй toast-ийг удаан харуулна
+    toastTimer = setTimeout(() => toast.classList.remove('active'), action ? 6000 : 3500);
   }
 
   // ============================================
@@ -2338,11 +2944,14 @@
   function renderAll() {
     updateStats();
     renderReminders();
+    renderAnalytics();
     renderTable();
   }
 
   initTheme();
   loadData();
+  initAnalyticsPanel();
+  initChartTooltip();
   renderAll();
 
   // Modal-ийн гадна дарахад хаах
