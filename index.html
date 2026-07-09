@@ -1242,6 +1242,206 @@
 
   #toastMessage { display: flex; align-items: center; justify-content: space-between; }
 
+  /* ============ Түгжээний дэлгэц ============ */
+  .lock-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    background-image:
+      repeating-linear-gradient(45deg, var(--pattern) 0, var(--pattern) 1px, transparent 1px, transparent 12px),
+      repeating-linear-gradient(-45deg, var(--pattern) 0, var(--pattern) 1px, transparent 1px, transparent 12px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .lock-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 5px solid var(--primary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 36px 32px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .lock-box .logo-mark { margin: 0 auto 16px; width: 64px; height: 64px; font-size: 38px; }
+
+  .lock-box h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--secondary-light);
+    margin-bottom: 4px;
+  }
+
+  [data-theme="dark"] .lock-box h2 { color: #A8BFDF; }
+
+  .lock-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+
+  .lock-box input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 15px;
+    background: var(--surface-2);
+    color: var(--text);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .lock-box input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+  }
+
+  .lock-box input[type="password"] { letter-spacing: 6px; font-size: 20px; }
+
+  .lock-box .btn { width: 100%; justify-content: center; margin-top: 4px; }
+
+  .lock-note {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  .lock-error {
+    color: var(--danger);
+    font-size: 13px;
+    min-height: 20px;
+    margin-bottom: 6px;
+  }
+
+  .lock-box.shake { animation: shake 0.4s; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+  }
+
+  .user-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .user-chip {
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-2);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .user-chip:hover { border-color: var(--primary); }
+
+  .user-chip.selected {
+    background: var(--secondary-light);
+    color: #fff;
+    border-color: var(--secondary-light);
+  }
+
+  /* Хэрэглэгчийн badge (header) */
+  .user-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    color: #fff;
+  }
+
+  .user-role-tag {
+    background: var(--accent);
+    color: #1A1A1A;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .user-role-tag.staff { background: rgba(255,255,255,0.25); color: #fff; }
+
+  /* Хэрэглэгч удирдах жагсаалт */
+  .user-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .user-list-item:last-child { border-bottom: none; }
+
+  .user-list-info { flex: 1; }
+
+  .user-list-name { font-weight: 500; display: flex; align-items: center; gap: 8px; }
+
+  .user-list-sub { font-size: 11.5px; color: var(--text-muted); }
+
+  .role-pill {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .role-pill.admin { background: var(--warning-soft); color: #8B6914; }
+  [data-theme="dark"] .role-pill.admin { color: var(--warning); }
+  .role-pill.staff { background: var(--info-soft); color: var(--secondary-light); }
+  [data-theme="dark"] .role-pill.staff { color: #8FB4E8; }
+
+  .add-user-form {
+    display: grid;
+    grid-template-columns: 1fr 110px 110px auto;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--border);
+  }
+
+  .add-user-form input, .add-user-form select {
+    padding: 9px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 13px;
+    background: var(--surface-2);
+    color: var(--text);
+  }
+
+  @media (max-width: 640px) {
+    .add-user-form { grid-template-columns: 1fr 1fr; }
+  }
+
   /* ============ Хэвлэх загвар ============ */
   .print-date { display: none; }
 
@@ -1332,6 +1532,34 @@
 </head>
 <body>
 
+<!-- Түгжээний дэлгэц -->
+<div class="lock-screen" id="lockScreen" style="display:none">
+  <div class="lock-box" id="lockBox">
+    <div class="logo-mark">А</div>
+    <h2>АВЛАГА ХЯНАГЧ</h2>
+
+    <!-- Анхны тохиргоо: админ үүсгэх -->
+    <div id="setupForm" style="display:none">
+      <p class="lock-sub">Тавтай морил! Эхлээд админ хэрэглэгч үүсгэнэ үү.</p>
+      <input type="text" id="setupName" placeholder="Таны нэр" maxlength="30">
+      <input type="password" id="setupPin" inputmode="numeric" maxlength="6" placeholder="PIN код (4-6 орон)" autocomplete="new-password">
+      <input type="password" id="setupPin2" inputmode="numeric" maxlength="6" placeholder="PIN код давтах" autocomplete="new-password">
+      <div class="lock-error" id="setupError"></div>
+      <button class="btn btn-primary" onclick="createFirstAdmin()">🚀 Эхлүүлэх</button>
+      <p class="lock-note">⚠️ PIN кодоо сайн тогтоож аваарай — мартвал зөвхөн browser-ийн өгөгдлийг цэвэрлэж дахин эхлүүлэх боломжтой.<br>Энэ хамгаалалт нь зөвхөн энэ төхөөрөмж дээрх хандалтыг хязгаарлана.</p>
+    </div>
+
+    <!-- Нэвтрэх -->
+    <div id="loginForm" style="display:none">
+      <p class="lock-sub">Хэрэглэгчээ сонгоод PIN кодоо оруулна уу</p>
+      <div class="user-chips" id="userChips"></div>
+      <input type="password" id="loginPin" inputmode="numeric" maxlength="6" placeholder="PIN код" autocomplete="off">
+      <div class="lock-error" id="loginError"></div>
+      <button class="btn btn-primary" onclick="attemptLogin()">🔓 Нэвтрэх</button>
+    </div>
+  </div>
+</div>
+
 <header class="header">
   <div class="header-content">
     <div class="logo">
@@ -1346,6 +1574,12 @@
         <div class="sync-dot"></div>
         <span id="syncStatus">Онлайн</span>
       </div>
+      <div class="user-badge" id="userBadge" style="display:none">
+        <span id="userBadgeName"></span>
+        <span class="user-role-tag" id="userBadgeRole"></span>
+      </div>
+      <button class="theme-toggle" id="usersBtn" onclick="openUsersModal()" title="Хэрэглэгчид удирдах" style="display:none">👥</button>
+      <button class="theme-toggle" onclick="lockApp()" title="Түгжих">🔒</button>
       <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Харанхуй/гэрэлтэй горим">🌙</button>
       <button class="btn btn-primary" onclick="openModal()">+ Шинэ авлага</button>
     </div>
@@ -1607,6 +1841,35 @@
   </div>
 </div>
 
+<!-- Users Modal -->
+<div class="modal-overlay" id="usersModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">👥 ХЭРЭГЛЭГЧИД</div>
+      <button class="modal-close" onclick="closeUsersModal()" title="Хаах (Esc)">×</button>
+    </div>
+    <div class="modal-body">
+      <div id="usersList"></div>
+      <div class="add-user-form">
+        <input type="text" id="newUserName" placeholder="Нэр" maxlength="30">
+        <select id="newUserRole">
+          <option value="staff">Ажилтан</option>
+          <option value="admin">Админ</option>
+        </select>
+        <input type="password" id="newUserPin" inputmode="numeric" maxlength="6" placeholder="PIN (4-6)" autocomplete="new-password">
+        <button class="btn btn-success btn-sm" onclick="addUser()">+ Нэмэх</button>
+      </div>
+      <p class="lock-note" style="text-align:left">
+        <strong>Админ:</strong> бүх эрхтэй — устгах, нөөц сэргээх, хэрэглэгч удирдах.<br>
+        <strong>Ажилтан:</strong> авлага бүртгэх, засах, төлбөр авах, сануулга илгээх. Устгах болон нөөц сэргээх эрхгүй.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" onclick="closeUsersModal()">Хаах</button>
+    </div>
+  </div>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast">
   <div id="toastMessage"></div>
@@ -1636,6 +1899,13 @@
   let agingFilter = null;       // Насжилтын шүүлтүүр (null | current | 1-30 | 31-60 | 61-90 | 90+)
   let lastDeleted = null;       // Устгасныг буцаахад ашиглана
   const ANALYTICS_KEY = 'avlaga_analytics_open';
+  const USERS_KEY = 'avlaga_users_v1';
+  const SESSION_KEY = 'avlaga_session';
+  let users = [];
+  let currentUser = null;       // Нэвтэрсэн хэрэглэгч
+  let selectedLoginUserId = null;
+  let failedAttempts = 0;
+  let lockoutUntil = 0;
 
   // ⚠️ ӨӨРИЙН Google Apps Script URL-ээ ЭНД оруулна
   const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzRUsOOwrHq8Ksf4U3FNzW6tW38uUYgfrHrbhnzSdQqnefLk3Rs9u46YTHrjPgLFLg0/exec';
@@ -1671,6 +1941,286 @@
       console.error('Хадгалахад алдаа гарлаа:', err);
       showToast('⚠️ Өгөгдөл хадгалахад алдаа гарлаа', 'error');
     }
+  }
+
+  // ============================================
+  // ХЭРЭГЛЭГЧ, PIN ХАМГААЛАЛТ, ЭРХИЙН СИСТЕМ
+  // ============================================
+  // Анхаар: энэ нь зөвхөн энэ төхөөрөмж (browser) дээрх хандалтыг
+  // хязгаарлах хамгаалалт. Сервергүй тул жинхэнэ нууцлал биш.
+
+  const ROLE_LABELS = { admin: 'Админ', staff: 'Ажилтан' };
+  const PERMS = {
+    admin: ['edit', 'payment', 'delete', 'restore', 'users', 'export'],
+    staff: ['edit', 'payment', 'export']
+  };
+
+  function can(perm) {
+    return !!currentUser && (PERMS[currentUser.role] || []).includes(perm);
+  }
+
+  async function hashPin(pin, salt) {
+    const data = new TextEncoder().encode(pin + '|' + salt);
+    const buf = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function randomSalt() {
+    const arr = new Uint8Array(16);
+    crypto.getRandomValues(arr);
+    return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function loadUsers() {
+    try {
+      users = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+    } catch { users = []; }
+  }
+
+  function saveUsers() {
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  }
+
+  function validPin(pin) {
+    return /^\d{4,6}$/.test(pin);
+  }
+
+  function initAuth() {
+    loadUsers();
+    const lock = document.getElementById('lockScreen');
+
+    if (users.length === 0) {
+      // Анхны тохиргоо
+      lock.style.display = 'flex';
+      document.getElementById('setupForm').style.display = 'block';
+      document.getElementById('loginForm').style.display = 'none';
+      setTimeout(() => document.getElementById('setupName').focus(), 100);
+      return;
+    }
+
+    // Session сэргээх (tab хаагдтал хадгалагдана)
+    const sessionUserId = sessionStorage.getItem(SESSION_KEY);
+    const user = users.find(u => u.id === sessionUserId);
+    if (user) {
+      setCurrentUser(user);
+      lock.style.display = 'none';
+      return;
+    }
+
+    showLoginScreen();
+  }
+
+  function showLoginScreen() {
+    const lock = document.getElementById('lockScreen');
+    lock.style.display = 'flex';
+    document.getElementById('setupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('loginPin').value = '';
+    document.getElementById('loginError').textContent = '';
+    selectedLoginUserId = users.length === 1 ? users[0].id : null;
+    renderUserChips();
+    setTimeout(() => document.getElementById('loginPin').focus(), 100);
+  }
+
+  function renderUserChips() {
+    const el = document.getElementById('userChips');
+    el.innerHTML = users.map(u => `
+      <button type="button" class="user-chip${u.id === selectedLoginUserId ? ' selected' : ''}" onclick="selectLoginUser('${u.id}')">
+        ${u.role === 'admin' ? '⭐' : '👤'} ${escapeHtml(u.name)}
+      </button>
+    `).join('');
+  }
+
+  function selectLoginUser(id) {
+    selectedLoginUserId = id;
+    renderUserChips();
+    document.getElementById('loginPin').focus();
+  }
+
+  async function createFirstAdmin() {
+    const name = document.getElementById('setupName').value.trim();
+    const pin = document.getElementById('setupPin').value;
+    const pin2 = document.getElementById('setupPin2').value;
+    const errEl = document.getElementById('setupError');
+
+    if (!name) { errEl.textContent = 'Нэрээ оруулна уу'; return; }
+    if (!validPin(pin)) { errEl.textContent = 'PIN код 4-6 оронтой тоо байх ёстой'; return; }
+    if (pin !== pin2) { errEl.textContent = 'PIN кодууд таарахгүй байна'; return; }
+
+    const salt = randomSalt();
+    const user = {
+      id: Date.now().toString(),
+      name,
+      role: 'admin',
+      salt,
+      pinHash: await hashPin(pin, salt),
+      createdAt: new Date().toISOString()
+    };
+    users.push(user);
+    saveUsers();
+    setCurrentUser(user);
+    sessionStorage.setItem(SESSION_KEY, user.id);
+    document.getElementById('lockScreen').style.display = 'none';
+    showToast(`🎉 Тавтай морил, ${user.name}!`);
+  }
+
+  async function attemptLogin() {
+    const errEl = document.getElementById('loginError');
+    const box = document.getElementById('lockBox');
+
+    // Олон удаа буруу оруулбал түр хүлээлгэнэ
+    if (Date.now() < lockoutUntil) {
+      const sec = Math.ceil((lockoutUntil - Date.now()) / 1000);
+      errEl.textContent = `Хэт олон буруу оролдлого. ${sec} секунд хүлээнэ үү.`;
+      return;
+    }
+
+    if (!selectedLoginUserId) { errEl.textContent = 'Хэрэглэгчээ сонгоно уу'; return; }
+    const pin = document.getElementById('loginPin').value;
+    if (!pin) { errEl.textContent = 'PIN кодоо оруулна уу'; return; }
+
+    const user = users.find(u => u.id === selectedLoginUserId);
+    const hash = await hashPin(pin, user.salt);
+
+    if (hash === user.pinHash) {
+      failedAttempts = 0;
+      setCurrentUser(user);
+      sessionStorage.setItem(SESSION_KEY, user.id);
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('loginPin').value = '';
+      errEl.textContent = '';
+      showToast(`👋 Сайн байна уу, ${user.name}!`);
+    } else {
+      failedAttempts++;
+      if (failedAttempts >= 5) {
+        lockoutUntil = Date.now() + 30000;
+        failedAttempts = 0;
+        errEl.textContent = 'Хэт олон буруу оролдлого. 30 секунд хүлээнэ үү.';
+      } else {
+        errEl.textContent = `PIN код буруу байна (${failedAttempts}/5)`;
+      }
+      document.getElementById('loginPin').value = '';
+      box.classList.remove('shake');
+      void box.offsetWidth; // animation дахин эхлүүлэх
+      box.classList.add('shake');
+    }
+  }
+
+  function setCurrentUser(user) {
+    currentUser = user;
+    document.getElementById('userBadge').style.display = 'flex';
+    document.getElementById('userBadgeName').textContent = user.name;
+    const roleEl = document.getElementById('userBadgeRole');
+    roleEl.textContent = ROLE_LABELS[user.role];
+    roleEl.className = 'user-role-tag' + (user.role === 'staff' ? ' staff' : '');
+    applyPermissions();
+    renderTable(); // устгах товчнууд эрхээс хамаарна
+  }
+
+  function lockApp() {
+    currentUser = null;
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('userBadge').style.display = 'none';
+    closeModal();
+    closeUsersModal();
+    showLoginScreen();
+  }
+
+  function applyPermissions() {
+    // Нөөц сэргээх — зөвхөн админ
+    const restoreBtn = document.querySelector('button[onclick*="importFile"]');
+    if (restoreBtn) restoreBtn.style.display = can('restore') ? '' : 'none';
+    // Хэрэглэгч удирдах — зөвхөн админ
+    document.getElementById('usersBtn').style.display = can('users') ? '' : 'none';
+  }
+
+  // --- Хэрэглэгч удирдах (админ) ---
+
+  function openUsersModal() {
+    if (!can('users')) { showToast('⛔ Танд энэ эрх байхгүй', 'error'); return; }
+    renderUsersList();
+    document.getElementById('usersModal').classList.add('active');
+  }
+
+  function closeUsersModal() {
+    document.getElementById('usersModal').classList.remove('active');
+  }
+
+  function renderUsersList() {
+    const el = document.getElementById('usersList');
+    el.innerHTML = users.map(u => {
+      const isSelf = currentUser && u.id === currentUser.id;
+      return `
+        <div class="user-list-item">
+          <div class="user-list-info">
+            <div class="user-list-name">${escapeHtml(u.name)}${isSelf ? ' <span style="font-size:11px;color:var(--text-muted)">(та)</span>' : ''}
+              <span class="role-pill ${u.role}">${ROLE_LABELS[u.role]}</span>
+            </div>
+            <div class="user-list-sub">Үүсгэсэн: ${formatDate(u.createdAt)}</div>
+          </div>
+          <button class="btn-icon" onclick="resetUserPin('${u.id}')" title="PIN солих">🔑</button>
+          ${!isSelf ? `<button class="btn-icon" onclick="deleteUser('${u.id}')" title="Устгах">🗑️</button>` : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  async function addUser() {
+    if (!can('users')) return;
+    const name = document.getElementById('newUserName').value.trim();
+    const role = document.getElementById('newUserRole').value;
+    const pin = document.getElementById('newUserPin').value;
+
+    if (!name) { showToast('Нэр оруулна уу', 'error'); return; }
+    if (users.some(u => u.name.toLowerCase() === name.toLowerCase())) {
+      showToast('Ийм нэртэй хэрэглэгч аль хэдийн байна', 'error');
+      return;
+    }
+    if (!validPin(pin)) { showToast('PIN код 4-6 оронтой тоо байх ёстой', 'error'); return; }
+
+    const salt = randomSalt();
+    users.push({
+      id: Date.now().toString(),
+      name,
+      role,
+      salt,
+      pinHash: await hashPin(pin, salt),
+      createdAt: new Date().toISOString()
+    });
+    saveUsers();
+    renderUsersList();
+    document.getElementById('newUserName').value = '';
+    document.getElementById('newUserPin').value = '';
+    showToast(`✓ "${name}" хэрэглэгч нэмэгдлээ`);
+  }
+
+  function deleteUser(id) {
+    if (!can('users')) return;
+    const user = users.find(u => u.id === id);
+    if (!user) return;
+    // Сүүлчийн админыг устгахыг хориглоно
+    if (user.role === 'admin' && users.filter(u => u.role === 'admin').length === 1) {
+      showToast('⛔ Сүүлчийн админыг устгах боломжгүй', 'error');
+      return;
+    }
+    if (!confirm(`"${user.name}" хэрэглэгчийг устгах уу?`)) return;
+    users = users.filter(u => u.id !== id);
+    saveUsers();
+    renderUsersList();
+    showToast('Хэрэглэгч устгагдлаа');
+  }
+
+  async function resetUserPin(id) {
+    if (!can('users')) return;
+    const user = users.find(u => u.id === id);
+    if (!user) return;
+    const pin = prompt(`"${user.name}"-ийн шинэ PIN код (4-6 оронтой тоо):`);
+    if (pin === null) return;
+    if (!validPin(pin)) { showToast('PIN код 4-6 оронтой тоо байх ёстой', 'error'); return; }
+    user.salt = randomSalt();
+    user.pinHash = await hashPin(pin, user.salt);
+    saveUsers();
+    showToast(`✓ "${user.name}"-ийн PIN код солигдлоо`);
   }
 
   // ============================================
@@ -1866,7 +2416,7 @@
           <div class="payment-item">
             <span class="pay-date">${formatDate(p.date)}</span>
             <span class="pay-amount">${formatCurrency(p.amount)}</span>
-            <span class="pay-note">${escapeHtml(p.note) || '-'}</span>
+            <span class="pay-note">${escapeHtml(p.note) || '-'}${p.by ? ' • ' + escapeHtml(p.by) : ''}</span>
             <button type="button" class="btn-icon" onclick="removePayment(${originalIdx})" title="Устгах">🗑️</button>
           </div>
         `;
@@ -1922,7 +2472,8 @@
       id: Date.now().toString(),
       date: date,
       amount: amount,
-      note: note
+      note: note,
+      by: currentUser ? currentUser.name : ''
     });
 
     // Цэвэрлэх
@@ -2049,7 +2600,8 @@
             <div class="reminder-detail">${r.message} • ${escapeHtml(r.entry.email) || 'имэйлгүй'} • ${escapeHtml(r.entry.phone)}</div>
           </div>
           <span class="reminder-type type-${r.type}">${r.label}</span>
-          <button class="btn-icon" onclick="sendReminder('${r.entry.id}', '${r.type}')">📧 Илгээх</button>
+          <button class="btn-icon" onclick="sendSms('${r.entry.id}')" title="SMS илгээх">💬 SMS</button>
+          <button class="btn-icon" onclick="sendReminder('${r.entry.id}', '${r.type}')" title="Имэйл илгээх">📧 Имэйл</button>
         </div>
       `;
     }).join('');
@@ -2501,10 +3053,11 @@
           <td data-label="Статус">${getStatusBadge(entry)}</td>
           <td data-label="">
             <div class="actions-cell">
+              ${balance > 0 ? `<button class="btn-icon" onclick="sendSms('${entry.id}')" title="SMS сануулга илгээх">💬</button>` : ''}
               ${balance > 0 ? `<button class="btn-icon" onclick="quickAddPayment('${entry.id}')" title="Төлбөр бүртгэх">💰</button>` : ''}
               <button class="btn-icon" onclick="editEntry('${entry.id}')" title="Засах">✏️</button>
               ${balance > 0 ? `<button class="btn-icon" onclick="markPaid('${entry.id}')" title="Бүрэн төлөгдсөн">✓</button>` : ''}
-              <button class="btn-icon" onclick="deleteEntry('${entry.id}')" title="Устгах">🗑️</button>
+              ${can('delete') ? `<button class="btn-icon" onclick="deleteEntry('${entry.id}')" title="Устгах">🗑️</button>` : ''}
             </div>
           </td>
         </tr>
@@ -2589,6 +3142,11 @@
   }
 
   function importJSON(event) {
+    if (!can('restore')) {
+      showToast('⛔ Нөөц сэргээх эрх зөвхөн админд бий', 'error');
+      event.target.value = '';
+      return;
+    }
     const file = event.target.files[0];
     if (!file) return;
 
@@ -2706,7 +3264,8 @@
       dueDate: document.getElementById('dueDate').value,
       lastContact: document.getElementById('lastContact').value,
       notes: document.getElementById('notes').value,
-      payments: [...currentPayments]
+      payments: [...currentPayments],
+      updatedBy: currentUser ? currentUser.name : ''
     };
 
     if (id) {
@@ -2737,6 +3296,10 @@
   }
 
   function deleteEntry(id) {
+    if (!can('delete')) {
+      showToast('⛔ Устгах эрх зөвхөн админд бий', 'error');
+      return;
+    }
     if (!confirm('Энэ бүртгэлийг устгахдаа итгэлтэй байна уу?')) return;
     const index = entries.findIndex(e => e.id === id);
     if (index < 0) return;
@@ -2787,7 +3350,8 @@
       id: Date.now().toString(),
       date: new Date().toISOString().split('T')[0],
       amount: remaining,
-      note: 'Бүрэн төлөгдсөн'
+      note: 'Бүрэн төлөгдсөн',
+      by: currentUser ? currentUser.name : ''
     });
 
     entry.paidAmount = entry.totalAmount;
@@ -2806,6 +3370,49 @@
         sendThankYouEmailNow(entry);
       }, 500);
     }
+  }
+
+  // ============================================
+  // SMS САНУУЛГА
+  // ============================================
+
+  function buildSmsMessage(entry) {
+    const balance = entry.totalAmount - getTotalPaid(entry);
+    const due = formatDate(entry.dueDate);
+    const today = new Date().toISOString().split('T')[0];
+    const overdueDays = daysBetween(entry.dueDate, today);
+
+    if (overdueDays > 0) {
+      return `Сайн байна уу, ${entry.customerName}. Танд ${formatCurrency(balance)} төлбөрийн үлдэгдэл байгаа бөгөөд хугацаа ${overdueDays} хоног хэтэрсэн байна (эцсийн огноо: ${due}). Та төлбөрөө барагдуулна уу. Баярлалаа.`;
+    } else if (overdueDays === 0) {
+      return `Сайн байна уу, ${entry.customerName}. Таны ${formatCurrency(balance)} төлбөрийн эцсийн хугацаа өнөөдөр дуусна. Та төлбөрөө хийнэ үү. Баярлалаа.`;
+    }
+    return `Сайн байна уу, ${entry.customerName}. Танд ${formatCurrency(balance)} төлбөрийн үлдэгдэл байна. Эцсийн хугацаа: ${due}. Баярлалаа.`;
+  }
+
+  function sendSms(entryId) {
+    const entry = entries.find(e => e.id === entryId);
+    if (!entry) return;
+    if (!entry.phone) {
+      showToast('⚠️ Утасны дугаар байхгүй байна', 'error');
+      return;
+    }
+
+    const msg = buildSmsMessage(entry);
+
+    // Desktop дээр SMS апп байхгүй тохиолдолд мессежийг хуулж өгнө
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(msg).catch(() => {});
+    }
+
+    // Утасны мессеж апп нээх (гар утсан дээр)
+    window.location.href = `sms:${entry.phone}?body=${encodeURIComponent(msg)}`;
+
+    entry.lastContact = new Date().toISOString().split('T')[0];
+    saveData();
+    renderTable();
+    syncToSheets(entry, 'update');
+    showToast(`💬 ${entry.customerName} (${entry.phone}) — SMS бэлдэгдлээ. Мессежийн текст хуулагдсан.`);
   }
 
   function sendReminder(entryId, type) {
@@ -2953,15 +3560,28 @@
   initAnalyticsPanel();
   initChartTooltip();
   renderAll();
+  initAuth();
 
   // Modal-ийн гадна дарахад хаах
   document.getElementById('modal').addEventListener('click', (e) => {
     if (e.target.id === 'modal') closeModal();
   });
 
+  document.getElementById('usersModal').addEventListener('click', (e) => {
+    if (e.target.id === 'usersModal') closeUsersModal();
+  });
+
   // Esc товчоор modal хаах
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape') { closeModal(); closeUsersModal(); }
+  });
+
+  // Түгжээний дэлгэц дээр Enter дарж нэвтрэх
+  document.getElementById('loginPin').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') attemptLogin();
+  });
+  document.getElementById('setupPin2').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') createFirstAdmin();
   });
 </script>
 
