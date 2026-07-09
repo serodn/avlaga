@@ -11,54 +11,96 @@
   :root {
     --primary: #C8102E;
     --primary-dark: #8B0A1F;
+    --primary-soft: rgba(200, 16, 46, 0.08);
     --secondary: #1B365D;
+    --secondary-light: #2A4A7C;
     --accent: #F4B400;
     --success: #2D7A4F;
+    --success-soft: #E0F2E9;
     --warning: #E89B2A;
+    --warning-soft: #FFF4D6;
     --danger: #B8261D;
-    --bg: #FAF7F2;
+    --danger-soft: #FCE4E2;
+    --info-soft: #E3EBF5;
+    --bg: #F6F3EE;
     --surface: #FFFFFF;
+    --surface-2: #FAF8F4;
     --text: #1A1A1A;
     --text-muted: #6B6B6B;
     --border: #E5DFD5;
-    --pattern: rgba(200, 16, 46, 0.04);
+    --pattern: rgba(200, 16, 46, 0.035);
+    --shadow-sm: 0 1px 3px rgba(27, 54, 93, 0.06), 0 1px 2px rgba(27, 54, 93, 0.04);
+    --shadow-md: 0 4px 12px rgba(27, 54, 93, 0.08), 0 2px 4px rgba(27, 54, 93, 0.05);
+    --shadow-lg: 0 12px 32px rgba(27, 54, 93, 0.16);
+    --radius: 10px;
+    --radius-sm: 6px;
+    --header-text: #FFFFFF;
+  }
+
+  [data-theme="dark"] {
+    --primary: #E8405A;
+    --primary-dark: #C8102E;
+    --primary-soft: rgba(232, 64, 90, 0.12);
+    --secondary: #16233A;
+    --secondary-light: #22355A;
+    --accent: #F4B400;
+    --success: #4CAF7D;
+    --success-soft: rgba(76, 175, 125, 0.15);
+    --warning: #E8A94D;
+    --warning-soft: rgba(232, 169, 77, 0.15);
+    --danger: #E05A50;
+    --danger-soft: rgba(224, 90, 80, 0.15);
+    --info-soft: rgba(90, 130, 190, 0.18);
+    --bg: #12161E;
+    --surface: #1B212C;
+    --surface-2: #212836;
+    --text: #E8E6E1;
+    --text-muted: #9AA0AB;
+    --border: #2C3442;
+    --pattern: rgba(232, 64, 90, 0.03);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
   body {
     font-family: 'Rubik', 'Noto Sans Mongolian', sans-serif;
     background: var(--bg);
-    background-image: 
+    background-image:
       repeating-linear-gradient(45deg, var(--pattern) 0, var(--pattern) 1px, transparent 1px, transparent 12px),
       repeating-linear-gradient(-45deg, var(--pattern) 0, var(--pattern) 1px, transparent 1px, transparent 12px);
     color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
   }
 
-  /* Header */
+  /* ============ Header ============ */
   .header {
     background: var(--secondary);
-    color: white;
-    padding: 0;
-    border-bottom: 4px solid var(--accent);
-    position: relative;
-    overflow: hidden;
+    color: var(--header-text);
+    border-bottom: 3px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: var(--shadow-md);
   }
 
   .header::before {
     content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
+    display: block;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--primary) 33%, #FFFFFF 33%, #FFFFFF 66%, var(--accent) 66%, var(--accent) 100%);
+    background: linear-gradient(90deg, #C8102E 0%, #C8102E 33%, #FFFFFF 33%, #FFFFFF 66%, var(--accent) 66%, var(--accent) 100%);
   }
 
   .header-content {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 32px 24px 24px;
+    padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,44 +111,49 @@
   .logo {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
   }
 
   .logo-mark {
-    width: 56px;
-    height: 56px;
-    background: var(--primary);
+    width: 48px;
+    height: 48px;
+    background: #C8102E;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
+    font-size: 28px;
     letter-spacing: 2px;
     border: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
     transform: rotate(-3deg);
+    transition: transform 0.3s;
   }
+
+  .logo:hover .logo-mark { transform: rotate(3deg) scale(1.05); }
 
   .logo-text h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
+    font-size: 26px;
     letter-spacing: 3px;
     margin: 0;
     line-height: 1;
   }
 
   .logo-text p {
-    font-size: 12px;
-    opacity: 0.85;
-    margin-top: 4px;
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 3px;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
 
   .header-actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   .sync-status {
@@ -114,45 +161,71 @@
     align-items: center;
     gap: 8px;
     background: rgba(255,255,255,0.1);
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12px;
   }
 
   .sync-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--success);
+    background: #4CAF7D;
     animation: pulse 2s infinite;
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(76,175,125,0.5); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(76,175,125,0); }
   }
 
-  /* Container */
+  .theme-toggle {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .theme-toggle:hover { background: rgba(255,255,255,0.22); transform: rotate(15deg); }
+
+  /* ============ Container ============ */
   .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 32px 24px;
+    padding: 28px 24px;
   }
 
-  /* Stats Grid */
+  /* ============ Stats ============ */
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
   }
 
   .stat-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    padding: 20px 24px;
+    border-radius: var(--radius);
+    padding: 18px 20px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 
   .stat-card::before {
@@ -163,26 +236,39 @@
     height: 100%;
   }
 
-  .stat-card.total::before { background: var(--secondary); }
+  .stat-card.total::before { background: var(--secondary-light); }
   .stat-card.pending::before { background: var(--accent); }
   .stat-card.overdue::before { background: var(--danger); }
   .stat-card.paid::before { background: var(--success); }
+  .stat-card.rate::before { background: var(--primary); }
+
+  .stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 
   .stat-label {
     font-size: 11px;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     margin-bottom: 8px;
     font-weight: 500;
   }
 
+  .stat-icon {
+    font-size: 18px;
+    opacity: 0.55;
+  }
+
   .stat-value {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 1;
     color: var(--text);
     letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
   }
 
   .stat-sub {
@@ -191,131 +277,190 @@
     margin-top: 6px;
   }
 
-  /* Search & Filter Bar */
-  .search-bar {
+  .stat-progress {
+    height: 6px;
+    background: var(--border);
+    border-radius: 999px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .stat-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px;
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+
+  /* ============ Reminder Panel ============ */
+  .reminder-panel {
     background: var(--surface);
     border: 1px solid var(--border);
-    padding: 16px 20px;
-    margin-bottom: 16px;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .reminder-header {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+    color: white;
+    padding: 14px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .reminder-header h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .reminder-header-right {
+    display: flex;
+    align-items: center;
     gap: 12px;
-    align-items: end;
   }
 
-  .search-input-group {
-    position: relative;
+  .reminder-count {
+    background: var(--accent);
+    color: #1A1A1A;
+    padding: 3px 12px;
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 999px;
   }
 
-  .search-input-group label {
-    display: block;
+  .reminder-chevron {
+    transition: transform 0.3s;
+    font-size: 12px;
+  }
+
+  .reminder-panel.open .reminder-chevron { transform: rotate(180deg); }
+
+  .reminder-body {
+    padding: 0 22px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+  }
+
+  .reminder-panel.open .reminder-body {
+    padding: 14px 22px;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  .reminder-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .reminder-item:last-child { border-bottom: none; }
+
+  .reminder-info { flex: 1; min-width: 200px; }
+
+  .reminder-name { font-weight: 500; margin-bottom: 4px; }
+
+  .reminder-detail { font-size: 12px; color: var(--text-muted); }
+
+  .reminder-type {
     font-size: 11px;
-    color: var(--text-muted);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 4px;
-    font-weight: 500;
   }
 
-  .search-input-group input,
-  .search-input-group select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid var(--border);
-    font-family: inherit;
-    font-size: 14px;
-    background: var(--surface);
-    transition: border-color 0.2s;
-  }
+  .type-before { background: var(--info-soft); color: var(--secondary-light); }
+  [data-theme="dark"] .type-before { color: #8FB4E8; }
+  .type-today { background: var(--warning-soft); color: #8B6914; }
+  [data-theme="dark"] .type-today { color: var(--warning); }
+  .type-overdue { background: var(--danger-soft); color: var(--danger); }
 
-  .search-input-group input:focus,
-  .search-input-group select:focus {
-    outline: none;
-    border-color: var(--primary);
-  }
-
-  .search-icon {
-    position: absolute;
-    right: 12px;
-    top: 32px;
-    color: var(--text-muted);
-    font-size: 14px;
-    pointer-events: none;
-  }
-
-  .clear-search-btn {
-    padding: 8px 16px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 12px;
-    transition: all 0.2s;
-    height: fit-content;
-  }
-
-  .clear-search-btn:hover {
-    background: var(--border);
-  }
-
-  /* Action Bar */
+  /* ============ Action Bar ============ */
   .action-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 14px;
   }
 
   .section-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
+    font-size: 26px;
     letter-spacing: 2px;
-    color: var(--secondary);
+    color: var(--secondary-light);
     display: flex;
     align-items: center;
     gap: 12px;
   }
 
+  [data-theme="dark"] .section-title { color: #A8BFDF; }
+
   .section-title::before {
     content: '';
     width: 6px;
-    height: 28px;
+    height: 26px;
     background: var(--primary);
+    border-radius: 3px;
+  }
+
+  .action-bar-right {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .filters {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     flex-wrap: wrap;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px;
   }
 
   .filter-btn {
-    padding: 8px 16px;
-    border: 1px solid var(--border);
-    background: var(--surface);
+    padding: 7px 16px;
+    border: none;
+    background: transparent;
     color: var(--text);
     font-family: inherit;
     font-size: 13px;
     cursor: pointer;
     transition: all 0.2s;
+    border-radius: 999px;
   }
 
-  .filter-btn:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
+  .filter-btn:hover { color: var(--primary); }
 
   .filter-btn.active {
-    background: var(--secondary);
+    background: var(--secondary-light);
     color: white;
-    border-color: var(--secondary);
   }
 
   .btn {
-    padding: 12px 24px;
+    padding: 11px 22px;
     border: none;
+    border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 14px;
     font-weight: 500;
@@ -324,58 +469,134 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
   }
 
   .btn-primary {
     background: var(--primary);
     color: white;
+    box-shadow: var(--shadow-sm);
   }
 
   .btn-primary:hover {
     background: var(--primary-dark);
     transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
 
   .btn-secondary {
     background: var(--surface);
-    color: var(--secondary);
-    border: 1px solid var(--secondary);
+    color: var(--text);
+    border: 1px solid var(--border);
   }
 
-  .btn-secondary:hover {
-    background: var(--secondary);
-    color: white;
-  }
+  .btn-secondary:hover { border-color: var(--secondary-light); }
 
-  .btn-success {
-    background: var(--success);
-    color: white;
-  }
+  .btn-success { background: var(--success); color: white; }
+  .btn-success:hover { filter: brightness(0.92); }
 
-  .btn-success:hover {
-    background: #1F5938;
-  }
+  .btn-sm { padding: 8px 14px; font-size: 13px; }
 
   .btn-icon {
-    padding: 6px 10px;
+    padding: 6px 9px;
     background: transparent;
     border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
     transition: all 0.2s;
+    color: var(--text);
   }
 
   .btn-icon:hover {
-    background: var(--bg);
+    background: var(--primary-soft);
     border-color: var(--primary);
+    transform: translateY(-1px);
   }
 
-  /* Table */
+  /* ============ Search Bar ============ */
+  .search-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .search-input-group { position: relative; }
+
+  .search-input-group label {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .search-input-group input,
+  .search-input-group select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--surface-2);
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .search-input-group input:focus,
+  .search-input-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 12px;
+    top: 33px;
+    color: var(--text-muted);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .clear-search-btn {
+    padding: 9px 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text);
+    transition: all 0.2s;
+    height: fit-content;
+  }
+
+  .clear-search-btn:hover { background: var(--border); }
+
+  .results-count {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 0 4px 8px;
+  }
+
+  /* ============ Table ============ */
   .table-container {
     background: var(--surface);
     border: 1px solid var(--border);
+    border-radius: var(--radius);
     overflow-x: auto;
+    box-shadow: var(--shadow-sm);
   }
 
   table {
@@ -387,88 +608,118 @@
   thead {
     background: var(--secondary);
     color: white;
+    position: sticky;
+    top: 0;
   }
 
   th {
-    padding: 14px 12px;
+    padding: 13px 12px;
     text-align: left;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 11.5px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
+    user-select: none;
   }
 
+  th.sortable { cursor: pointer; transition: background 0.15s; }
+  th.sortable:hover { background: var(--secondary-light); }
+
+  th .sort-arrow {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  th.num, td.num { text-align: right; }
+
   td {
-    padding: 14px 12px;
+    padding: 13px 12px;
     border-bottom: 1px solid var(--border);
     white-space: nowrap;
   }
 
-  tbody tr:hover {
-    background: var(--bg);
-  }
+  tbody tr { transition: background 0.15s; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--primary-soft); }
 
-  tbody tr.row-overdue {
-    background: rgba(184, 38, 29, 0.04);
-  }
+  tbody tr.row-overdue { background: var(--danger-soft); }
+  tbody tr.row-overdue:hover { background: var(--danger-soft); filter: brightness(0.97); }
 
-  tbody tr.row-paid {
-    opacity: 0.6;
-  }
+  tbody tr.row-paid { opacity: 0.55; }
 
   .badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     padding: 4px 10px;
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-radius: 2px;
+    letter-spacing: 0.4px;
+    border-radius: 999px;
   }
 
-  .badge-pending {
-    background: #FFF4D6;
-    color: #8B6914;
+  .badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
   }
 
-  .badge-overdue {
-    background: #FCE4E2;
-    color: var(--danger);
-  }
-
-  .badge-paid {
-    background: #E0F2E9;
-    color: var(--success);
-  }
-
-  .badge-upcoming {
-    background: #E3EBF5;
-    color: var(--secondary);
-  }
+  .badge-pending { background: var(--warning-soft); color: #8B6914; }
+  [data-theme="dark"] .badge-pending { color: var(--warning); }
+  .badge-overdue { background: var(--danger-soft); color: var(--danger); }
+  .badge-paid { background: var(--success-soft); color: var(--success); }
+  .badge-upcoming { background: var(--info-soft); color: var(--secondary-light); }
+  [data-theme="dark"] .badge-upcoming { color: #8FB4E8; }
 
   .amount {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    letter-spacing: 1px;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+    font-variant-numeric: tabular-nums;
   }
 
-  .amount-due {
-    color: var(--danger);
-    font-weight: 500;
+  .amount-due { color: var(--danger); }
+  .amount-paid { color: var(--success); }
+
+  .pay-progress {
+    height: 4px;
+    width: 72px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 4px;
+    margin-left: auto;
   }
 
-  .actions-cell {
-    display: flex;
-    gap: 4px;
+  .pay-progress-fill {
+    height: 100%;
+    background: var(--success);
+    border-radius: 999px;
   }
 
-  /* Modal */
+  .actions-cell { display: flex; gap: 4px; }
+
+  .customer-cell strong { font-weight: 500; }
+  .customer-cell .sub {
+    display: block;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  /* ============ Modal ============ */
   .modal-overlay {
     display: none;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(27, 54, 93, 0.6);
+    inset: 0;
+    background: rgba(15, 25, 42, 0.55);
+    backdrop-filter: blur(3px);
     z-index: 100;
     align-items: flex-start;
     justify-content: center;
@@ -476,21 +727,28 @@
     overflow-y: auto;
   }
 
-  .modal-overlay.active {
-    display: flex;
-  }
+  .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   .modal {
     background: var(--surface);
     width: 100%;
-    max-width: 640px;
-    padding: 0;
-    border-top: 6px solid var(--primary);
-    position: relative;
+    max-width: 660px;
+    border-top: 5px solid var(--primary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.25s ease;
+    overflow: hidden;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
   }
 
   .modal-header {
-    padding: 24px 32px;
+    padding: 22px 30px;
     border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
@@ -499,24 +757,28 @@
 
   .modal-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
+    font-size: 24px;
     letter-spacing: 2px;
-    color: var(--secondary);
+    color: var(--secondary-light);
   }
+
+  [data-theme="dark"] .modal-title { color: #A8BFDF; }
 
   .modal-close {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 22px;
     cursor: pointer;
     color: var(--text-muted);
     line-height: 1;
-    padding: 4px 8px;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s, color 0.15s;
   }
 
-  .modal-body {
-    padding: 24px 32px;
-  }
+  .modal-close:hover { background: var(--danger-soft); color: var(--danger); }
+
+  .modal-body { padding: 24px 30px; }
 
   .form-grid {
     display: grid;
@@ -524,9 +786,7 @@
     gap: 16px;
   }
 
-  .form-grid .full {
-    grid-column: 1 / -1;
-  }
+  .form-grid .full { grid-column: 1 / -1; }
 
   .form-group {
     display: flex;
@@ -536,26 +796,26 @@
   }
 
   .form-group label {
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 500;
   }
 
-  .form-group label .required {
-    color: var(--primary);
-  }
+  .form-group label .required { color: var(--primary); }
 
   .form-group input,
   .form-group textarea,
   .form-group select {
     padding: 10px 12px;
     border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 14px;
-    background: var(--surface);
-    transition: border-color 0.2s;
+    background: var(--surface-2);
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
 
   .form-group input:focus,
@@ -563,14 +823,14 @@
   .form-group select:focus {
     outline: none;
     border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
   }
 
-  .form-group textarea {
-    resize: vertical;
-    min-height: 70px;
-  }
+  .form-group input[readonly] { background: var(--bg); }
 
-  /* Autocomplete dropdown */
+  .form-group textarea { resize: vertical; min-height: 70px; }
+
+  /* Autocomplete */
   .autocomplete-list {
     position: absolute;
     top: 100%;
@@ -579,16 +839,15 @@
     background: var(--surface);
     border: 1px solid var(--primary);
     border-top: none;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
     max-height: 200px;
     overflow-y: auto;
     z-index: 10;
     display: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-md);
   }
 
-  .autocomplete-list.active {
-    display: block;
-  }
+  .autocomplete-list.active { display: block; }
 
   .autocomplete-item {
     padding: 10px 12px;
@@ -598,59 +857,92 @@
     transition: background 0.15s;
   }
 
-  .autocomplete-item:last-child {
-    border-bottom: none;
-  }
-
-  .autocomplete-item:hover,
-  .autocomplete-item.highlighted {
-    background: var(--bg);
-  }
-
-  .autocomplete-item .name {
-    font-weight: 500;
-    color: var(--text);
-  }
-
-  .autocomplete-item .details {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
+  .autocomplete-item:last-child { border-bottom: none; }
+  .autocomplete-item:hover, .autocomplete-item.highlighted { background: var(--primary-soft); }
+  .autocomplete-item .name { font-weight: 500; color: var(--text); }
+  .autocomplete-item .details { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
   .modal-footer {
-    padding: 20px 32px;
+    padding: 18px 30px;
     border-top: 1px solid var(--border);
-    background: var(--bg);
+    background: var(--surface-2);
     display: flex;
     justify-content: flex-end;
     gap: 12px;
   }
 
-  /* Payment History Section */
+  /* ============ Payment History ============ */
   .payment-history {
     margin-top: 24px;
-    padding-top: 24px;
+    padding-top: 22px;
     border-top: 2px solid var(--border);
-  }
-
-  .payment-history-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
   }
 
   .payment-history-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 18px;
     letter-spacing: 1.5px;
-    color: var(--secondary);
+    color: var(--secondary-light);
+    margin-bottom: 14px;
+  }
+
+  [data-theme="dark"] .payment-history-title { color: #A8BFDF; }
+
+  .balance-summary {
+    background: var(--surface-2);
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid var(--secondary-light);
+    border-radius: var(--radius-sm);
+  }
+
+  .balance-summary .label {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .balance-summary .value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .balance-summary .value.paid { color: var(--success); }
+  .balance-summary .value.due { color: var(--danger); }
+
+  .add-payment-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr auto;
+    gap: 8px;
+    margin-bottom: 12px;
+    align-items: end;
+  }
+
+  .add-payment-form input {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 13px;
+    background: var(--surface-2);
+    color: var(--text);
+  }
+
+  .add-payment-form input:focus {
+    outline: none;
+    border-color: var(--primary);
   }
 
   .payment-list {
-    background: var(--bg);
+    background: var(--surface-2);
     border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     max-height: 200px;
     overflow-y: auto;
   }
@@ -665,27 +957,15 @@
     font-size: 13px;
   }
 
-  .payment-item:last-child {
-    border-bottom: none;
-  }
-
-  .payment-item .pay-date {
-    color: var(--text-muted);
-    font-size: 12px;
-  }
-
+  .payment-item:last-child { border-bottom: none; }
+  .payment-item .pay-date { color: var(--text-muted); font-size: 12px; }
   .payment-item .pay-amount {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 15px;
     color: var(--success);
     letter-spacing: 1px;
   }
-
-  .payment-item .pay-note {
-    color: var(--text-muted);
-    font-size: 12px;
-    font-style: italic;
-  }
+  .payment-item .pay-note { color: var(--text-muted); font-size: 12px; font-style: italic; }
 
   .payment-empty {
     padding: 16px;
@@ -694,149 +974,45 @@
     font-size: 13px;
   }
 
-  .add-payment-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr auto;
-    gap: 8px;
-    margin-bottom: 12px;
-    align-items: end;
-  }
-
-  .add-payment-form input {
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    font-family: inherit;
-    font-size: 13px;
-  }
-
-  .balance-summary {
-    background: var(--bg);
-    padding: 12px 16px;
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 4px solid var(--secondary);
-  }
-
-  .balance-summary .label {
-    font-size: 12px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .balance-summary .value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 1px;
-  }
-
-  .balance-summary .value.paid {
-    color: var(--success);
-  }
-
-  .balance-summary .value.due {
-    color: var(--danger);
-  }
-
-  /* Reminder Panel */
-  .reminder-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-
-  .reminder-header {
-    background: linear-gradient(135deg, var(--secondary), #2A4A7C);
-    color: white;
-    padding: 16px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .reminder-header h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 2px;
-  }
-
-  .reminder-count {
-    background: var(--accent);
-    color: var(--text);
-    padding: 4px 12px;
-    font-weight: 600;
-    font-size: 13px;
-  }
-
-  .reminder-body {
-    padding: 16px 24px;
-    display: none;
-  }
-
-  .reminder-body.active {
-    display: block;
-  }
-
-  .reminder-item {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .reminder-item:last-child {
-    border-bottom: none;
-  }
-
-  .reminder-info {
-    flex: 1;
-  }
-
-  .reminder-name {
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-
-  .reminder-detail {
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-
-  .reminder-type {
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 2px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .type-before { background: #E3EBF5; color: var(--secondary); }
-  .type-today { background: #FFF4D6; color: #8B6914; }
-  .type-overdue { background: #FCE4E2; color: var(--danger); }
-
-  /* Empty state */
+  /* ============ Empty state ============ */
   .empty-state {
     text-align: center;
-    padding: 60px 20px;
+    padding: 56px 20px;
     color: var(--text-muted);
   }
+
+  .empty-state .icon { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
 
   .empty-state h3 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
+    font-size: 22px;
     letter-spacing: 2px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: var(--text);
   }
 
-  /* Footer */
+  /* ============ Toast ============ */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--secondary);
+    color: white;
+    padding: 14px 22px;
+    border-left: 4px solid var(--success);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(420px);
+    transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    z-index: 200;
+    max-width: 360px;
+    font-size: 14px;
+  }
+
+  .toast.active { transform: translateX(0); }
+  .toast.error { border-left-color: var(--danger); }
+
+  /* ============ Footer ============ */
   .footer {
     text-align: center;
     padding: 32px 24px;
@@ -853,76 +1029,61 @@
     letter-spacing: 4px;
   }
 
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--secondary);
-    color: white;
-    padding: 16px 24px;
-    border-left: 4px solid var(--success);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transform: translateX(400px);
-    transition: transform 0.3s;
-    z-index: 200;
-    max-width: 360px;
+  /* ============ Responsive ============ */
+  @media (max-width: 900px) {
+    .search-bar { grid-template-columns: 1fr 1fr; }
+    .search-bar .clear-search-btn { grid-column: 1 / -1; }
   }
 
-  .toast.active {
-    transform: translateX(0);
-  }
-
-  .toast.error {
-    border-left-color: var(--danger);
-  }
-
-  /* Results count */
-  .results-count {
-    font-size: 12px;
-    color: var(--text-muted);
-    padding: 0 4px;
-  }
-
-  /* Responsive */
   @media (max-width: 768px) {
-    .form-grid {
-      grid-template-columns: 1fr;
+    .form-grid { grid-template-columns: 1fr; }
+    .header-content { padding: 12px 16px; }
+    .container { padding: 20px 14px; }
+    .stat-value { font-size: 26px; }
+    .search-bar { grid-template-columns: 1fr; gap: 12px; }
+    .add-payment-form { grid-template-columns: 1fr 1fr; }
+    .payment-item { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .logo-text h1 { font-size: 20px; }
+    .logo-text p { display: none; }
+
+    /* Хүснэгтийг карт болгож харуулах */
+    .table-container { border: none; background: transparent; box-shadow: none; overflow: visible; }
+    table, tbody, tr, td { display: block; width: 100%; }
+    thead { display: none; }
+    tbody tr {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      padding: 8px 0;
+      box-shadow: var(--shadow-sm);
     }
-    .header-content {
-      padding: 24px 16px;
-    }
-    .container {
-      padding: 24px 16px;
-    }
-    .stat-value {
-      font-size: 28px;
-    }
-    .search-bar {
-      grid-template-columns: 1fr;
+    tbody tr.row-overdue { border-left: 4px solid var(--danger); }
+    td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 12px;
+      padding: 7px 16px;
+      border-bottom: none;
+      white-space: normal;
+      text-align: right;
     }
-    .add-payment-form {
-      grid-template-columns: 1fr 1fr;
+    td.num { text-align: right; }
+    td::before {
+      content: attr(data-label);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+      text-align: left;
+      flex-shrink: 0;
     }
-    .payment-item {
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-  }
-
-  /* Info banner */
-  .info-banner {
-    background: linear-gradient(90deg, #FFF4D6 0%, #FAF7F2 100%);
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin-bottom: 24px;
-    font-size: 13px;
-    color: var(--text);
-  }
-
-  .info-banner strong {
-    color: var(--secondary);
+    td[data-label=""]::before { display: none; }
+    .actions-cell { justify-content: flex-end; }
+    .pay-progress { margin-left: auto; }
+    tbody tr:hover { background: var(--surface); }
   }
 </style>
 </head>
@@ -942,9 +1103,8 @@
         <div class="sync-dot"></div>
         <span id="syncStatus">Онлайн</span>
       </div>
-      <button class="btn btn-primary" onclick="openModal()">
-        + Шинэ авлага
-      </button>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Харанхуй/гэрэлтэй горим">🌙</button>
+      <button class="btn btn-primary" onclick="openModal()">+ Шинэ авлага</button>
     </div>
   </div>
 </header>
@@ -953,33 +1113,56 @@
 
   <!-- Stats -->
   <div class="stats">
-    <div class="stat-card total">
-      <div class="stat-label">Нийт авлага</div>
+    <div class="stat-card total" onclick="setFilter('all')">
+      <div class="stat-top">
+        <div class="stat-label">Нийт авлага</div>
+        <div class="stat-icon">📒</div>
+      </div>
       <div class="stat-value" id="statTotal">0₮</div>
       <div class="stat-sub" id="statTotalCount">0 бүртгэл</div>
     </div>
-    <div class="stat-card pending">
-      <div class="stat-label">Хүлээгдэж буй</div>
+    <div class="stat-card pending" onclick="setFilter('pending')">
+      <div class="stat-top">
+        <div class="stat-label">Хүлээгдэж буй</div>
+        <div class="stat-icon">⏳</div>
+      </div>
       <div class="stat-value" id="statPending">0₮</div>
       <div class="stat-sub" id="statPendingCount">0 бүртгэл</div>
     </div>
-    <div class="stat-card overdue">
-      <div class="stat-label">Хугацаа хэтэрсэн</div>
+    <div class="stat-card overdue" onclick="setFilter('overdue')">
+      <div class="stat-top">
+        <div class="stat-label">Хугацаа хэтэрсэн</div>
+        <div class="stat-icon">⚠️</div>
+      </div>
       <div class="stat-value" id="statOverdue">0₮</div>
       <div class="stat-sub" id="statOverdueCount">0 бүртгэл</div>
     </div>
-    <div class="stat-card paid">
-      <div class="stat-label">Төлөгдсөн</div>
+    <div class="stat-card paid" onclick="setFilter('paid')">
+      <div class="stat-top">
+        <div class="stat-label">Төлөгдсөн</div>
+        <div class="stat-icon">✅</div>
+      </div>
       <div class="stat-value" id="statPaid">0₮</div>
       <div class="stat-sub" id="statPaidCount">0 бүртгэл</div>
+    </div>
+    <div class="stat-card rate">
+      <div class="stat-top">
+        <div class="stat-label">Барагдуулалт</div>
+        <div class="stat-icon">📈</div>
+      </div>
+      <div class="stat-value" id="statRate">0%</div>
+      <div class="stat-progress"><div class="stat-progress-fill" id="statRateBar"></div></div>
     </div>
   </div>
 
   <!-- Reminders Panel -->
-  <div class="reminder-panel">
+  <div class="reminder-panel" id="reminderPanel">
     <div class="reminder-header" onclick="toggleReminders()">
       <h3>📬 Өнөөдөр илгээх сануулгууд</h3>
-      <span class="reminder-count" id="reminderCount">0</span>
+      <div class="reminder-header-right">
+        <span class="reminder-count" id="reminderCount">0</span>
+        <span class="reminder-chevron">▼</span>
+      </div>
     </div>
     <div class="reminder-body" id="reminderBody">
       <div id="reminderList"></div>
@@ -989,18 +1172,24 @@
   <!-- Action Bar -->
   <div class="action-bar">
     <div class="section-title">АВЛАГЫН ЖАГСААЛТ</div>
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterTable('all', this)">Бүгд</button>
-      <button class="filter-btn" onclick="filterTable('pending', this)">Хүлээгдэж буй</button>
-      <button class="filter-btn" onclick="filterTable('overdue', this)">Хугацаа хэтэрсэн</button>
-      <button class="filter-btn" onclick="filterTable('paid', this)">Төлөгдсөн</button>
+    <div class="action-bar-right">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all" onclick="filterTable('all', this)">Бүгд</button>
+        <button class="filter-btn" data-filter="pending" onclick="filterTable('pending', this)">Хүлээгдэж буй</button>
+        <button class="filter-btn" data-filter="overdue" onclick="filterTable('overdue', this)">Хэтэрсэн</button>
+        <button class="filter-btn" data-filter="paid" onclick="filterTable('paid', this)">Төлөгдсөн</button>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="exportCSV()" title="Excel-д нээх боломжтой CSV файл татах">📥 CSV</button>
+      <button class="btn btn-secondary btn-sm" onclick="exportJSON()" title="Бүх өгөгдлийг нөөцлөх">💾 Нөөцлөх</button>
+      <button class="btn btn-secondary btn-sm" onclick="document.getElementById('importFile').click()" title="Нөөц файлаас сэргээх">📂 Сэргээх</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
     </div>
   </div>
 
   <!-- Search Bar -->
   <div class="search-bar">
     <div class="search-input-group">
-      <label>Хайх (нэр эсвэл утас)</label>
+      <label>Хайх (нэр, утас, имэйл, бараа)</label>
       <input type="text" id="searchText" placeholder="Жишээ: Дэлгэрцэцэг эсвэл 99112233" oninput="renderTable()">
       <span class="search-icon">🔍</span>
     </div>
@@ -1025,7 +1214,7 @@
         <option value="1000000-999999999">1сая₮-аас дээш</option>
       </select>
     </div>
-    <button class="clear-search-btn" onclick="clearSearch()">Цэвэрлэх</button>
+    <button class="clear-search-btn" onclick="clearSearch()">✕ Цэвэрлэх</button>
   </div>
 
   <div class="results-count" id="resultsCount"></div>
@@ -1035,15 +1224,13 @@
     <table id="dataTable">
       <thead>
         <tr>
-          <th>Огноо</th>
-          <th>Үйлчлүүлэгч</th>
-          <th>Утас</th>
-          <th>Имэйл</th>
+          <th class="sortable" onclick="sortBy('date')">Огноо<span class="sort-arrow" data-key="date"></span></th>
+          <th class="sortable" onclick="sortBy('customerName')">Үйлчлүүлэгч<span class="sort-arrow" data-key="customerName"></span></th>
           <th>Бараа/Үйлчилгээ</th>
-          <th>Нийт</th>
-          <th>Төлсөн</th>
-          <th>Үлдэгдэл</th>
-          <th>Эцсийн огноо</th>
+          <th class="sortable num" onclick="sortBy('totalAmount')">Нийт<span class="sort-arrow" data-key="totalAmount"></span></th>
+          <th class="num">Төлсөн</th>
+          <th class="sortable num" onclick="sortBy('balance')">Үлдэгдэл<span class="sort-arrow" data-key="balance"></span></th>
+          <th class="sortable" onclick="sortBy('dueDate')">Эцсийн огноо<span class="sort-arrow" data-key="dueDate"></span></th>
           <th>Статус</th>
           <th></th>
         </tr>
@@ -1059,7 +1246,7 @@
   <div class="modal">
     <div class="modal-header">
       <div class="modal-title" id="modalTitle">ШИНЭ АВЛАГА БҮРТГЭХ</div>
-      <button class="modal-close" onclick="closeModal()">×</button>
+      <button class="modal-close" onclick="closeModal()" title="Хаах (Esc)">×</button>
     </div>
     <div class="modal-body">
       <form id="entryForm" onsubmit="handleSubmit(event)">
@@ -1093,7 +1280,7 @@
           </div>
           <div class="form-group">
             <label>Төлсөн дүн (₮) <span style="font-size: 10px; color: var(--text-muted);">— автомат тооцоологдоно</span></label>
-            <input type="number" id="paidAmount" placeholder="0" min="0" value="0" readonly style="background: var(--bg);">
+            <input type="number" id="paidAmount" placeholder="0" min="0" value="0" readonly>
           </div>
           <div class="form-group">
             <label>Төлөх эцсийн огноо <span class="required">*</span></label>
@@ -1111,9 +1298,7 @@
 
         <!-- Payment History Section -->
         <div class="payment-history" id="paymentHistorySection" style="display: none;">
-          <div class="payment-history-header">
-            <div class="payment-history-title">💰 Төлбөрийн түүх</div>
-          </div>
+          <div class="payment-history-title">💰 Төлбөрийн түүх</div>
 
           <div class="balance-summary">
             <div>
@@ -1130,7 +1315,7 @@
             <input type="date" id="newPaymentDate" title="Огноо">
             <input type="number" id="newPaymentAmount" placeholder="Дүн (₮)" min="0">
             <input type="text" id="newPaymentNote" placeholder="Тэмдэглэл (заавал биш)">
-            <button type="button" class="btn btn-success" onclick="addPayment()" style="padding: 8px 16px; font-size: 13px;">+ Нэмэх</button>
+            <button type="button" class="btn btn-success btn-sm" onclick="addPayment()">+ Нэмэх</button>
           </div>
 
           <div class="payment-list" id="paymentList">
@@ -1163,9 +1348,12 @@
   // ============================================
 
   const STORAGE_KEY = 'avlaga_data_v2';
+  const THEME_KEY = 'avlaga_theme';
   let entries = [];
   let currentFilter = 'all';
   let currentPayments = []; // Modal-д засаж байгаа төлбөрийн жагсаалт
+  let sortState = { key: 'date', dir: 'desc' };
+  let autocompleteResults = []; // Autocomplete-ийн одоогийн үр дүн
 
   // ⚠️ ӨӨРИЙН Google Apps Script URL-ээ ЭНД оруулна
   const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzRUsOOwrHq8Ksf4U3FNzW6tW38uUYgfrHrbhnzSdQqnefLk3Rs9u46YTHrjPgLFLg0/exec';
@@ -1175,21 +1363,59 @@
   // ============================================
 
   function loadData() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      entries = JSON.parse(stored);
-      // Хуучин өгөгдөлд payments массив байхгүй бол үүсгэх
-      entries.forEach(e => {
-        if (!e.payments) e.payments = [];
-      });
-    } else {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        entries = JSON.parse(stored);
+        // Хуучин өгөгдөлд payments массив байхгүй бол үүсгэх
+        entries.forEach(e => {
+          if (!e.payments) e.payments = [];
+        });
+      } else {
+        entries = [];
+        saveData();
+      }
+    } catch (err) {
+      console.error('Өгөгдөл уншихад алдаа гарлаа:', err);
       entries = [];
-      saveData();
+      showToast('⚠️ Хадгалсан өгөгдлийг уншиж чадсангүй', 'error');
     }
   }
 
   function saveData() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    } catch (err) {
+      console.error('Хадгалахад алдаа гарлаа:', err);
+      showToast('⚠️ Өгөгдөл хадгалахад алдаа гарлаа', 'error');
+    }
+  }
+
+  // ============================================
+  // ХАРАНХУЙ ГОРИМ
+  // ============================================
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  }
+
+  function initTheme() {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved) {
+      applyTheme(saved);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      applyTheme('dark');
+    } else {
+      applyTheme('light');
+    }
   }
 
   // ============================================
@@ -1213,6 +1439,17 @@
     return Math.floor(diff);
   }
 
+  // HTML-д аюулгүй оруулах (XSS хамгаалалт)
+  function escapeHtml(text) {
+    if (text === null || text === undefined) return '';
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function getTotalPaid(entry) {
     if (!entry.payments || entry.payments.length === 0) {
       return entry.paidAmount || 0;
@@ -1224,10 +1461,10 @@
     const totalPaid = getTotalPaid(entry);
     const balance = entry.totalAmount - totalPaid;
     if (balance <= 0) return 'paid';
-    
+
     const today = new Date().toISOString().split('T')[0];
     const daysOverdue = daysBetween(entry.dueDate, today);
-    
+
     if (daysOverdue > 0) return 'overdue';
     return 'pending';
   }
@@ -1238,11 +1475,11 @@
     if (balance <= 0) {
       return '<span class="badge badge-paid">Төлөгдсөн</span>';
     }
-    
+
     const today = new Date().toISOString().split('T')[0];
     const daysOverdue = daysBetween(entry.dueDate, today);
     const daysUntilDue = -daysOverdue;
-    
+
     if (daysOverdue > 0) {
       return `<span class="badge badge-overdue">${daysOverdue} хоног хэтэрсэн</span>`;
     } else if (daysUntilDue <= 2) {
@@ -1252,7 +1489,7 @@
   }
 
   // ============================================
-  // 1.3 — ҮЙЛЧЛҮҮЛЭГЧИЙН AUTOCOMPLETE
+  // ҮЙЛЧЛҮҮЛЭГЧИЙН AUTOCOMPLETE
   // ============================================
 
   function getUniqueCustomers() {
@@ -1285,17 +1522,17 @@
     }
 
     const customers = getUniqueCustomers();
-    const filtered = customers.filter(c => 
+    autocompleteResults = customers.filter(c =>
       c.name.toLowerCase().includes(value.toLowerCase())
     ).slice(0, 5);
 
-    if (filtered.length === 0) {
+    if (autocompleteResults.length === 0) {
       list.classList.remove('active');
       return;
     }
 
-    list.innerHTML = filtered.map((c, i) => `
-      <div class="autocomplete-item" onmousedown="selectCustomer('${escapeHtml(c.name)}', '${escapeHtml(c.phone)}', '${escapeHtml(c.email || '')}')">
+    list.innerHTML = autocompleteResults.map((c, i) => `
+      <div class="autocomplete-item" onmousedown="selectCustomer(${i})">
         <div class="name">${escapeHtml(c.name)}</div>
         <div class="details">${escapeHtml(c.phone)} ${c.email ? '• ' + escapeHtml(c.email) : ''} • ${c.count} удаа худалдаа хийсэн</div>
       </div>
@@ -1304,12 +1541,14 @@
     list.classList.add('active');
   }
 
-  function selectCustomer(name, phone, email) {
-    document.getElementById('customerName').value = name;
-    document.getElementById('phone').value = phone;
-    document.getElementById('email').value = email;
+  function selectCustomer(index) {
+    const c = autocompleteResults[index];
+    if (!c) return;
+    document.getElementById('customerName').value = c.name;
+    document.getElementById('phone').value = c.phone || '';
+    document.getElementById('email').value = c.email || '';
     hideAutocomplete();
-    showToast(`✓ "${name}"-ийн мэдээлэл автомат бөглөгдлөө`);
+    showToast(`✓ "${c.name}"-ийн мэдээлэл автомат бөглөгдлөө`);
   }
 
   function hideAutocomplete() {
@@ -1319,30 +1558,25 @@
     }, 200);
   }
 
-  function escapeHtml(text) {
-    if (!text) return '';
-    return text.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-  }
-
   // ============================================
-  // 1.4 — ТӨЛБӨРИЙН ТҮҮХ
+  // ТӨЛБӨРИЙН ТҮҮХ
   // ============================================
 
   function renderPaymentHistory() {
     const list = document.getElementById('paymentList');
-    
+
     if (currentPayments.length === 0) {
       list.innerHTML = '<div class="payment-empty">Төлбөр бүртгэгдээгүй байна</div>';
     } else {
       // Огноогоор эрэмбэлэх (шинэ нь дээр)
       const sorted = [...currentPayments].sort((a, b) => new Date(b.date) - new Date(a.date));
-      list.innerHTML = sorted.map((p, idx) => {
+      list.innerHTML = sorted.map((p) => {
         const originalIdx = currentPayments.indexOf(p);
         return `
           <div class="payment-item">
             <span class="pay-date">${formatDate(p.date)}</span>
             <span class="pay-amount">${formatCurrency(p.amount)}</span>
-            <span class="pay-note">${p.note || '-'}</span>
+            <span class="pay-note">${escapeHtml(p.note) || '-'}</span>
             <button type="button" class="btn-icon" onclick="removePayment(${originalIdx})" title="Устгах">🗑️</button>
           </div>
         `;
@@ -1387,7 +1621,7 @@
 
     const total = parseInt(document.getElementById('totalAmount').value) || 0;
     const currentPaid = currentPayments.reduce((sum, p) => sum + (p.amount || 0), 0);
-    
+
     if (currentPaid + amount > total) {
       if (!confirm(`Энэ төлбөрийг нэмбэл нийт төлсөн дүн (${formatCurrency(currentPaid + amount)}) нь нийт дүнгээс (${formatCurrency(total)}) хэтрэх гэж байна. Үргэлжлүүлэх үү?`)) {
         return;
@@ -1422,15 +1656,16 @@
   // ============================================
 
   function updateStats() {
-    let total = 0, pending = 0, overdue = 0, paid = 0;
+    let total = 0, pending = 0, overdue = 0, paid = 0, totalCollected = 0;
     let totalCount = entries.length, pendingCount = 0, overdueCount = 0, paidCount = 0;
 
     entries.forEach(entry => {
       const totalPaid = getTotalPaid(entry);
       const balance = entry.totalAmount - totalPaid;
       total += entry.totalAmount;
+      totalCollected += Math.min(totalPaid, entry.totalAmount);
       const status = getStatus(entry);
-      
+
       if (status === 'paid') {
         paid += entry.totalAmount;
         paidCount++;
@@ -1451,6 +1686,11 @@
     document.getElementById('statOverdueCount').textContent = `${overdueCount} бүртгэл`;
     document.getElementById('statPaid').textContent = formatCurrency(paid);
     document.getElementById('statPaidCount').textContent = `${paidCount} бүртгэл`;
+
+    // Барагдуулалтын хувь
+    const rate = total > 0 ? Math.round((totalCollected / total) * 100) : 0;
+    document.getElementById('statRate').textContent = rate + '%';
+    document.getElementById('statRateBar').style.width = rate + '%';
   }
 
   // ============================================
@@ -1505,7 +1745,7 @@
     countEl.textContent = reminders.length;
 
     if (reminders.length === 0) {
-      listEl.innerHTML = '<div class="empty-state"><h3>Өнөөдөр илгээх сануулга байхгүй</h3><p>Бүх төлбөр хугацаандаа байна.</p></div>';
+      listEl.innerHTML = '<div class="empty-state"><div class="icon">🎉</div><h3>Өнөөдөр илгээх сануулга байхгүй</h3><p>Бүх төлбөр хугацаандаа байна.</p></div>';
       return;
     }
 
@@ -1515,8 +1755,8 @@
       return `
         <div class="reminder-item">
           <div class="reminder-info">
-            <div class="reminder-name">${r.entry.customerName} — ${formatCurrency(balance)}</div>
-            <div class="reminder-detail">${r.message} • ${r.entry.email || 'имэйлгүй'} • ${r.entry.phone}</div>
+            <div class="reminder-name">${escapeHtml(r.entry.customerName)} — ${formatCurrency(balance)}</div>
+            <div class="reminder-detail">${r.message} • ${escapeHtml(r.entry.email) || 'имэйлгүй'} • ${escapeHtml(r.entry.phone)}</div>
           </div>
           <span class="reminder-type type-${r.type}">${r.label}</span>
           <button class="btn-icon" onclick="sendReminder('${r.entry.id}', '${r.type}')">📧 Илгээх</button>
@@ -1526,11 +1766,11 @@
   }
 
   function toggleReminders() {
-    document.getElementById('reminderBody').classList.toggle('active');
+    document.getElementById('reminderPanel').classList.toggle('open');
   }
 
   // ============================================
-  // 1.2 — ХАЙЛТ БА ШҮҮЛТҮҮР
+  // ХАЙЛТ БА ШҮҮЛТҮҮР
   // ============================================
 
   function getFilteredEntries() {
@@ -1541,10 +1781,10 @@
       result = result.filter(e => getStatus(e) === currentFilter);
     }
 
-    // Текстээр хайх (нэр эсвэл утас)
+    // Текстээр хайх (нэр, утас, имэйл, бараа)
     const searchText = document.getElementById('searchText').value.toLowerCase().trim();
     if (searchText) {
-      result = result.filter(e => 
+      result = result.filter(e =>
         e.customerName.toLowerCase().includes(searchText) ||
         e.phone.includes(searchText) ||
         (e.email && e.email.toLowerCase().includes(searchText)) ||
@@ -1557,7 +1797,7 @@
     if (dateRange !== 'all') {
       const now = new Date();
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      
+
       result = result.filter(e => {
         const entryDate = new Date(e.date);
         switch(dateRange) {
@@ -1568,11 +1808,11 @@
             weekAgo.setDate(weekAgo.getDate() - 7);
             return entryDate >= weekAgo;
           case 'month':
-            return entryDate.getMonth() === today.getMonth() && 
+            return entryDate.getMonth() === today.getMonth() &&
                    entryDate.getFullYear() === today.getFullYear();
           case 'last_month':
             const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-            return entryDate.getMonth() === lastMonth.getMonth() && 
+            return entryDate.getMonth() === lastMonth.getMonth() &&
                    entryDate.getFullYear() === lastMonth.getFullYear();
           case 'quarter':
             const quarterAgo = new Date(today);
@@ -1601,6 +1841,52 @@
   }
 
   // ============================================
+  // ЭРЭМБЭЛЭЛТ
+  // ============================================
+
+  function sortBy(key) {
+    if (sortState.key === key) {
+      sortState.dir = sortState.dir === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortState.key = key;
+      sortState.dir = key === 'customerName' ? 'asc' : 'desc';
+    }
+    renderTable();
+  }
+
+  function getSortValue(entry, key) {
+    switch (key) {
+      case 'balance': return entry.totalAmount - getTotalPaid(entry);
+      case 'date': return new Date(entry.date).getTime() || 0;
+      case 'dueDate': return new Date(entry.dueDate).getTime() || 0;
+      case 'customerName': return (entry.customerName || '').toLowerCase();
+      default: return entry[key] || 0;
+    }
+  }
+
+  function applySorting(list) {
+    const { key, dir } = sortState;
+    return list.sort((a, b) => {
+      const va = getSortValue(a, key);
+      const vb = getSortValue(b, key);
+      let cmp;
+      if (typeof va === 'string') cmp = va.localeCompare(vb, 'mn');
+      else cmp = va - vb;
+      return dir === 'asc' ? cmp : -cmp;
+    });
+  }
+
+  function updateSortArrows() {
+    document.querySelectorAll('.sort-arrow').forEach(el => {
+      if (el.dataset.key === sortState.key) {
+        el.textContent = sortState.dir === 'asc' ? '▲' : '▼';
+      } else {
+        el.textContent = '';
+      }
+    });
+  }
+
+  // ============================================
   // ХҮСНЭГТ РЕНДЕРЛЭХ
   // ============================================
 
@@ -1611,33 +1897,39 @@
 
     // Үр дүнгийн тоо
     countEl.textContent = `${filtered.length} / ${entries.length} бүртгэл`;
+    updateSortArrows();
 
     if (filtered.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="11" class="empty-state"><h3>Бүртгэл олдсонгүй</h3><p>Хайлтын нөхцлийг өөрчилнө үү эсвэл шинэ авлага нэмнэ үү.</p></td></tr>';
+      tbody.innerHTML = '<tr><td colspan="9" data-label=""><div class="empty-state"><div class="icon">📭</div><h3>Бүртгэл олдсонгүй</h3><p>Хайлтын нөхцлийг өөрчилнө үү эсвэл шинэ авлага нэмнэ үү.</p></div></td></tr>';
       return;
     }
 
-    filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    applySorting(filtered);
 
     tbody.innerHTML = filtered.map(entry => {
       const totalPaid = getTotalPaid(entry);
       const balance = entry.totalAmount - totalPaid;
       const status = getStatus(entry);
       const rowClass = status === 'overdue' ? 'row-overdue' : (status === 'paid' ? 'row-paid' : '');
+      const payPct = entry.totalAmount > 0 ? Math.min(100, Math.round((totalPaid / entry.totalAmount) * 100)) : 0;
 
       return `
         <tr class="${rowClass}">
-          <td>${formatDate(entry.date)}</td>
-          <td><strong>${entry.customerName}</strong></td>
-          <td>${entry.phone}</td>
-          <td style="color: var(--text-muted); font-size: 12px;">${entry.email || '-'}</td>
-          <td>${entry.product}</td>
-          <td><span class="amount">${formatCurrency(entry.totalAmount)}</span></td>
-          <td><span class="amount" style="color: var(--success);">${formatCurrency(totalPaid)}</span></td>
-          <td><span class="amount amount-due">${formatCurrency(balance)}</span></td>
-          <td>${formatDate(entry.dueDate)}</td>
-          <td>${getStatusBadge(entry)}</td>
-          <td>
+          <td data-label="Огноо">${formatDate(entry.date)}</td>
+          <td data-label="Үйлчлүүлэгч" class="customer-cell">
+            <strong>${escapeHtml(entry.customerName)}</strong>
+            <span class="sub">${escapeHtml(entry.phone)}${entry.email ? ' • ' + escapeHtml(entry.email) : ''}</span>
+          </td>
+          <td data-label="Бараа">${escapeHtml(entry.product)}</td>
+          <td data-label="Нийт" class="num"><span class="amount">${formatCurrency(entry.totalAmount)}</span></td>
+          <td data-label="Төлсөн" class="num">
+            <span class="amount amount-paid">${formatCurrency(totalPaid)}</span>
+            <div class="pay-progress"><div class="pay-progress-fill" style="width:${payPct}%"></div></div>
+          </td>
+          <td data-label="Үлдэгдэл" class="num"><span class="amount amount-due">${formatCurrency(balance)}</span></td>
+          <td data-label="Эцсийн огноо">${formatDate(entry.dueDate)}</td>
+          <td data-label="Статус">${getStatusBadge(entry)}</td>
+          <td data-label="">
             <div class="actions-cell">
               <button class="btn-icon" onclick="editEntry('${entry.id}')" title="Засах">✏️</button>
               <button class="btn-icon" onclick="markPaid('${entry.id}')" title="Бүрэн төлөгдсөн">✓</button>
@@ -1654,6 +1946,116 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     renderTable();
+  }
+
+  function setFilter(filter) {
+    const btn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+    if (btn) filterTable(filter, btn);
+  }
+
+  // ============================================
+  // CSV / JSON ЭКСПОРТ, ИМПОРТ
+  // ============================================
+
+  function downloadFile(filename, content, mime) {
+    const blob = new Blob([content], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function csvEscape(value) {
+    const s = String(value === null || value === undefined ? '' : value);
+    if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+
+  function exportCSV() {
+    const filtered = getFilteredEntries();
+    if (filtered.length === 0) {
+      showToast('Татах бүртгэл алга байна', 'error');
+      return;
+    }
+    applySorting(filtered);
+
+    const statusLabels = { pending: 'Хүлээгдэж буй', overdue: 'Хугацаа хэтэрсэн', paid: 'Төлөгдсөн' };
+    const header = ['Огноо', 'Үйлчлүүлэгч', 'Утас', 'Имэйл', 'Бараа/Үйлчилгээ', 'Нийт дүн', 'Төлсөн', 'Үлдэгдэл', 'Эцсийн огноо', 'Статус', 'Тэмдэглэл'];
+    const rows = filtered.map(e => {
+      const paid = getTotalPaid(e);
+      return [
+        e.date, e.customerName, e.phone, e.email || '', e.product,
+        e.totalAmount, paid, e.totalAmount - paid,
+        e.dueDate, statusLabels[getStatus(e)], e.notes || ''
+      ].map(csvEscape).join(',');
+    });
+
+    // BOM нэмснээр Excel дээр кирилл зөв харагдана
+    const csv = '﻿' + header.map(csvEscape).join(',') + '\n' + rows.join('\n');
+    const today = new Date().toISOString().split('T')[0];
+    downloadFile(`avlaga_${today}.csv`, csv, 'text/csv;charset=utf-8');
+    showToast(`📥 ${filtered.length} бүртгэл CSV файлаар татагдлаа`);
+  }
+
+  function exportJSON() {
+    if (entries.length === 0) {
+      showToast('Нөөцлөх өгөгдөл алга байна', 'error');
+      return;
+    }
+    const backup = {
+      app: 'avlaga',
+      version: 2,
+      exportedAt: new Date().toISOString(),
+      entries: entries
+    };
+    const today = new Date().toISOString().split('T')[0];
+    downloadFile(`avlaga_backup_${today}.json`, JSON.stringify(backup, null, 2), 'application/json');
+    showToast(`💾 ${entries.length} бүртгэл нөөцлөгдлөө`);
+  }
+
+  function importJSON(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target.result);
+        const imported = Array.isArray(data) ? data : data.entries;
+        if (!Array.isArray(imported)) throw new Error('Буруу формат');
+
+        // Шинээр нэмэгдэх болон шинэчлэгдэх тоог урьдчилан харуулах
+        const existingIds = new Set(entries.map(en => en.id));
+        const newOnes = imported.filter(en => !existingIds.has(en.id)).length;
+        const updates = imported.length - newOnes;
+
+        if (!confirm(`Нөөц файлаас ${imported.length} бүртгэл олдлоо (${newOnes} шинэ, ${updates} шинэчлэгдэнэ). Үргэлжлүүлэх үү?`)) {
+          event.target.value = '';
+          return;
+        }
+
+        // ID-аар нэгтгэх: байгаа нь шинэчлэгдэж, шинэ нь нэмэгдэнэ
+        imported.forEach(imp => {
+          if (!imp.payments) imp.payments = [];
+          const idx = entries.findIndex(en => en.id === imp.id);
+          if (idx >= 0) entries[idx] = imp;
+          else entries.push(imp);
+        });
+
+        saveData();
+        renderAll();
+        showToast(`📂 ${imported.length} бүртгэл амжилттай сэргээгдлээ`);
+      } catch (err) {
+        console.error('Импортын алдаа:', err);
+        showToast('⚠️ Файлыг уншиж чадсангүй — формат буруу байна', 'error');
+      }
+      event.target.value = '';
+    };
+    reader.readAsText(file);
   }
 
   // ============================================
@@ -1681,7 +2083,7 @@
         document.getElementById('dueDate').value = entry.dueDate;
         document.getElementById('lastContact').value = entry.lastContact || '';
         document.getElementById('notes').value = entry.notes || '';
-        
+
         // Төлбөрийн түүх ачаалах
         if (entry.payments && entry.payments.length > 0) {
           currentPayments = [...entry.payments];
@@ -1706,6 +2108,8 @@
     }
 
     modal.classList.add('active');
+    // Эхний талбарт фокус өгөх
+    setTimeout(() => document.getElementById('customerName').focus(), 100);
   }
 
   function closeModal() {
@@ -1715,17 +2119,17 @@
 
   function handleSubmit(event) {
     event.preventDefault();
-    
+
     const id = document.getElementById('entryId').value;
     const totalPaid = currentPayments.reduce((sum, p) => sum + (p.amount || 0), 0);
 
     const data = {
       id: id || Date.now().toString(),
       date: document.getElementById('date').value,
-      customerName: document.getElementById('customerName').value,
-      phone: document.getElementById('phone').value,
-      email: document.getElementById('email').value,
-      product: document.getElementById('product').value,
+      customerName: document.getElementById('customerName').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      product: document.getElementById('product').value.trim(),
       totalAmount: parseInt(document.getElementById('totalAmount').value) || 0,
       paidAmount: totalPaid,
       dueDate: document.getElementById('dueDate').value,
@@ -1743,7 +2147,7 @@
       showToast('Шинэ авлага бүртгэгдлээ');
     }
 
-   saveData();
+    saveData();
     renderAll();
     closeModal();
 
@@ -1756,7 +2160,7 @@
       }, 1000);
     }
   }
-  
+
   function editEntry(id) {
     openModal(id);
   }
@@ -1772,17 +2176,17 @@
   function markPaid(id) {
     const entry = entries.find(e => e.id === id);
     if (!entry) return;
-    
+
     const totalPaid = getTotalPaid(entry);
     const remaining = entry.totalAmount - totalPaid;
-    
+
     if (remaining <= 0) {
       showToast('Энэ авлага аль хэдийн бүрэн төлөгдсөн байна');
       return;
     }
-    
+
     if (!confirm(`${entry.customerName}-ийн үлдсэн ${formatCurrency(remaining)} төлбөрийг бүрэн төлсөнд тооцох уу?`)) return;
-    
+
     if (!entry.payments) entry.payments = [];
     entry.payments.push({
       id: Date.now().toString(),
@@ -1790,10 +2194,10 @@
       amount: remaining,
       note: 'Бүрэн төлөгдсөн'
     });
-    
+
     entry.paidAmount = entry.totalAmount;
     entry.lastContact = new Date().toISOString().split('T')[0];
-    
+
     saveData();
     renderAll();
     showToast(`✅ ${entry.customerName} — бүрэн төлөгдсөн`);
@@ -1809,10 +2213,10 @@
     }
   }
 
- function sendReminder(entryId, type) {
+  function sendReminder(entryId, type) {
     const entry = entries.find(e => e.id === entryId);
     if (!entry) return;
-    
+
     if (!entry.email) {
       showToast('⚠️ Энэ үйлчлүүлэгч имэйлгүй байна', 'error');
       return;
@@ -1823,11 +2227,11 @@
       today: 'Өнөөдрийн сануулга',
       overdue: '7 хоног хэтэрсэн сануулга'
     };
-    
+
     // Имэйл бодитоор илгээх
     sendReminderEmailNow(entry, type);
     showToast(`📧 ${entry.customerName} (${entry.email})-руу ${typeLabels[type]} илгээгдэв`);
-    
+
     entry.lastContact = new Date().toISOString().split('T')[0];
     saveData();
     renderTable();
@@ -1837,7 +2241,8 @@
   // ============================================
   // GOOGLE SHEETS СИНК
   // ============================================
-// Шууд баярлалаа имэйл илгээх
+
+  // Шууд баярлалаа имэйл илгээх
   function sendThankYouEmailNow(entry) {
     if (!SHEETS_WEBHOOK_URL) {
       console.log('[DEMO] Имэйл илгээхэд URL хэрэгтэй');
@@ -1893,6 +2298,7 @@
       console.error('Сануулга илгээх алдаа:', err);
     });
   }
+
   function syncToSheets(data, action) {
     if (!SHEETS_WEBHOOK_URL) {
       console.log('[DEMO] Google Sheets холбогдоогүй:', action, data);
@@ -1914,12 +2320,15 @@
   // TOAST МЭДЭГДЭЛ
   // ============================================
 
+  let toastTimer = null;
+
   function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     const msg = document.getElementById('toastMessage');
     msg.textContent = message;
     toast.className = 'toast active' + (type === 'error' ? ' error' : '');
-    setTimeout(() => toast.classList.remove('active'), 3500);
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('active'), 3500);
   }
 
   // ============================================
@@ -1932,11 +2341,18 @@
     renderTable();
   }
 
+  initTheme();
   loadData();
   renderAll();
 
+  // Modal-ийн гадна дарахад хаах
   document.getElementById('modal').addEventListener('click', (e) => {
     if (e.target.id === 'modal') closeModal();
+  });
+
+  // Esc товчоор modal хаах
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
   });
 </script>
 
