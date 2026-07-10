@@ -3,35 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Авлага Хянагч | Авлага удирдлагын систем</title>
+<title>Гоо Сайхан | Солонгос гоо сайхны барааны авлагын систем</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+Mongolian:wght@400;500;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #C8102E;
-    --primary-dark: #8B0A1F;
-    --primary-soft: rgba(200, 16, 46, 0.08);
-    --secondary: #1B365D;
-    --secondary-light: #2A4A7C;
-    --accent: #F4B400;
+    --primary: #D6336C;
+    --primary-dark: #A61E4D;
+    --primary-soft: rgba(214, 51, 108, 0.08);
+    --secondary: #3D2645;
+    --secondary-light: #5C3A66;
+    --accent: #E9B44C;
     --success: #2D7A4F;
     --success-soft: #E0F2E9;
     --warning: #E89B2A;
     --warning-soft: #FFF4D6;
     --danger: #B8261D;
     --danger-soft: #FCE4E2;
-    --info-soft: #E3EBF5;
-    --bg: #F6F3EE;
+    --info-soft: #F2E6F0;
+    --bg: #FBF4F2;
     --surface: #FFFFFF;
-    --surface-2: #FAF8F4;
+    --surface-2: #FBF6F4;
     --text: #1A1A1A;
     --text-muted: #6B6B6B;
-    --border: #E5DFD5;
-    --pattern: rgba(200, 16, 46, 0.035);
-    --shadow-sm: 0 1px 3px rgba(27, 54, 93, 0.06), 0 1px 2px rgba(27, 54, 93, 0.04);
-    --shadow-md: 0 4px 12px rgba(27, 54, 93, 0.08), 0 2px 4px rgba(27, 54, 93, 0.05);
-    --shadow-lg: 0 12px 32px rgba(27, 54, 93, 0.16);
+    --border: #EEDFDC;
+    --pattern: rgba(214, 51, 108, 0.03);
+    --shadow-sm: 0 1px 3px rgba(61, 38, 69, 0.06), 0 1px 2px rgba(61, 38, 69, 0.04);
+    --shadow-md: 0 4px 12px rgba(61, 38, 69, 0.08), 0 2px 4px rgba(61, 38, 69, 0.05);
+    --shadow-lg: 0 12px 32px rgba(61, 38, 69, 0.16);
     --radius: 10px;
     --radius-sm: 6px;
     --header-text: #FFFFFF;
@@ -45,26 +46,26 @@
   }
 
   [data-theme="dark"] {
-    --primary: #E8405A;
-    --primary-dark: #C8102E;
-    --primary-soft: rgba(232, 64, 90, 0.12);
-    --secondary: #16233A;
-    --secondary-light: #22355A;
-    --accent: #F4B400;
+    --primary: #F06595;
+    --primary-dark: #D6336C;
+    --primary-soft: rgba(240, 101, 149, 0.12);
+    --secondary: #241826;
+    --secondary-light: #453050;
+    --accent: #E9B44C;
     --success: #4CAF7D;
     --success-soft: rgba(76, 175, 125, 0.15);
     --warning: #E8A94D;
     --warning-soft: rgba(232, 169, 77, 0.15);
     --danger: #E05A50;
     --danger-soft: rgba(224, 90, 80, 0.15);
-    --info-soft: rgba(90, 130, 190, 0.18);
-    --bg: #12161E;
-    --surface: #1B212C;
-    --surface-2: #212836;
-    --text: #E8E6E1;
-    --text-muted: #9AA0AB;
-    --border: #2C3442;
-    --pattern: rgba(232, 64, 90, 0.03);
+    --info-soft: rgba(165, 115, 180, 0.18);
+    --bg: #161118;
+    --surface: #211A24;
+    --surface-2: #2A2130;
+    --text: #EBE5E9;
+    --text-muted: #A399A3;
+    --border: #3A3040;
+    --pattern: rgba(240, 101, 149, 0.03);
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
     --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
@@ -107,7 +108,7 @@
     content: '';
     display: block;
     height: 4px;
-    background: linear-gradient(90deg, #C8102E 0%, #C8102E 33%, #FFFFFF 33%, #FFFFFF 66%, var(--accent) 66%, var(--accent) 100%);
+    background: linear-gradient(90deg, #D6336C 0%, #F8C8DC 50%, #E9B44C 100%);
   }
 
   .header-content {
@@ -130,7 +131,7 @@
   .logo-mark {
     width: 48px;
     height: 48px;
-    background: #C8102E;
+    background: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -399,7 +400,7 @@
   }
 
   .type-before { background: var(--info-soft); color: var(--secondary-light); }
-  [data-theme="dark"] .type-before { color: #8FB4E8; }
+  [data-theme="dark"] .type-before { color: #D9A7CE; }
   .type-today { background: var(--warning-soft); color: #8B6914; }
   [data-theme="dark"] .type-today { color: var(--warning); }
   .type-overdue { background: var(--danger-soft); color: var(--danger); }
@@ -424,7 +425,7 @@
     gap: 12px;
   }
 
-  [data-theme="dark"] .section-title { color: #A8BFDF; }
+  [data-theme="dark"] .section-title { color: #E3B8D2; }
 
   .section-title::before {
     content: '';
@@ -535,10 +536,20 @@
     padding: 16px 20px;
     margin-bottom: 14px;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
     gap: 12px;
     align-items: end;
     box-shadow: var(--shadow-sm);
+  }
+
+  .cat-tag {
+    display: inline-block;
+    font-size: 10.5px;
+    color: var(--primary);
+    background: var(--primary-soft);
+    padding: 1px 8px;
+    border-radius: 999px;
+    margin-top: 2px;
   }
 
   .search-input-group { position: relative; }
@@ -688,7 +699,7 @@
   .badge-overdue { background: var(--danger-soft); color: var(--danger); }
   .badge-paid { background: var(--success-soft); color: var(--success); }
   .badge-upcoming { background: var(--info-soft); color: var(--secondary-light); }
-  [data-theme="dark"] .badge-upcoming { color: #8FB4E8; }
+  [data-theme="dark"] .badge-upcoming { color: #D9A7CE; }
 
   .amount {
     font-family: 'Bebas Neue', sans-serif;
@@ -775,7 +786,7 @@
     color: var(--secondary-light);
   }
 
-  [data-theme="dark"] .modal-title { color: #A8BFDF; }
+  [data-theme="dark"] .modal-title { color: #E3B8D2; }
 
   .modal-close {
     background: none;
@@ -899,7 +910,7 @@
     margin-bottom: 14px;
   }
 
-  [data-theme="dark"] .payment-history-title { color: #A8BFDF; }
+  [data-theme="dark"] .payment-history-title { color: #E3B8D2; }
 
   .balance-summary {
     background: var(--surface-2);
@@ -1069,7 +1080,7 @@
     font-weight: 400;
   }
 
-  [data-theme="dark"] .analytics-card h4 { color: #A8BFDF; }
+  [data-theme="dark"] .analytics-card h4 { color: #E3B8D2; }
 
   /* Насжилтын тайлан */
   .aging-row {
@@ -1193,7 +1204,7 @@
     flex-shrink: 0;
   }
 
-  [data-theme="dark"] .debtor-rank { color: #A8BFDF; }
+  [data-theme="dark"] .debtor-rank { color: #E3B8D2; }
 
   /* Утасны холбоос */
   .tel-link { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--text-muted); }
@@ -1279,7 +1290,7 @@
     margin-bottom: 4px;
   }
 
-  [data-theme="dark"] .lock-box h2 { color: #A8BFDF; }
+  [data-theme="dark"] .lock-box h2 { color: #E3B8D2; }
 
   .lock-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
 
@@ -1417,7 +1428,7 @@
   .role-pill.admin { background: var(--warning-soft); color: #8B6914; }
   [data-theme="dark"] .role-pill.admin { color: var(--warning); }
   .role-pill.staff { background: var(--info-soft); color: var(--secondary-light); }
-  [data-theme="dark"] .role-pill.staff { color: #8FB4E8; }
+  [data-theme="dark"] .role-pill.staff { color: #D9A7CE; }
 
   .add-user-form {
     display: grid;
@@ -1535,8 +1546,8 @@
 <!-- Түгжээний дэлгэц -->
 <div class="lock-screen" id="lockScreen" style="display:none">
   <div class="lock-box" id="lockBox">
-    <div class="logo-mark">А</div>
-    <h2>АВЛАГА ХЯНАГЧ</h2>
+    <div class="logo-mark">K</div>
+    <h2>ГОО САЙХАН</h2>
 
     <!-- Анхны тохиргоо: админ үүсгэх -->
     <div id="setupForm" style="display:none">
@@ -1563,10 +1574,10 @@
 <header class="header">
   <div class="header-content">
     <div class="logo">
-      <div class="logo-mark">А</div>
+      <div class="logo-mark">K</div>
       <div class="logo-text">
-        <h1>АВЛАГА ХЯНАГЧ</h1>
-        <p>Авлага удирдлагын систем</p>
+        <h1>ГОО САЙХАН</h1>
+        <p>Солонгос гоо сайхны бараа • Авлага</p>
       </div>
     </div>
     <div class="header-actions">
@@ -1659,6 +1670,10 @@
           <h4>Топ өртэй үйлчлүүлэгчид</h4>
           <div id="debtorList"></div>
         </div>
+        <div class="analytics-card">
+          <h4>Ангиллаар (үлдэгдэл)</h4>
+          <div id="categoryList"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1699,8 +1714,22 @@
   <div class="search-bar">
     <div class="search-input-group">
       <label>Хайх (нэр, утас, имэйл, бараа)</label>
-      <input type="text" id="searchText" placeholder="Жишээ: Дэлгэрцэцэг эсвэл 99112233" oninput="renderTable()">
+      <input type="text" id="searchText" placeholder="Жишээ: Сарантуяа эсвэл COSRX" oninput="renderTable()">
       <span class="search-icon">🔍</span>
+    </div>
+    <div class="search-input-group">
+      <label>Ангилал</label>
+      <select id="searchCategory" onchange="renderTable()">
+        <option value="all">Бүгд</option>
+        <option value="Арьс арчилгаа">🧴 Арьс арчилгаа</option>
+        <option value="Нүүр будалт">💄 Нүүр будалт</option>
+        <option value="Маск">🎭 Маск</option>
+        <option value="Үс арчилгаа">💇 Үс арчилгаа</option>
+        <option value="Биеийн арчилгаа">🧼 Биеийн арчилгаа</option>
+        <option value="Үнэртэн">🌺 Үнэртэн</option>
+        <option value="Багц">🎁 Багц</option>
+        <option value="Бусад">📦 Бусад</option>
+      </select>
     </div>
     <div class="search-input-group">
       <label>Хугацаа</label>
@@ -1780,13 +1809,26 @@
             <label>Мэйл хаяг</label>
             <input type="email" id="email" placeholder="example@email.com">
           </div>
-          <div class="form-group full">
-            <label>Бараа/Үйлчилгээ <span class="required">*</span></label>
-            <input type="text" id="product" placeholder="Жишээ: 2 шуудай гурил" required>
+          <div class="form-group">
+            <label>Барааны ангилал <span class="required">*</span></label>
+            <select id="category" required>
+              <option value="Арьс арчилгаа">🧴 Арьс арчилгаа</option>
+              <option value="Нүүр будалт">💄 Нүүр будалт</option>
+              <option value="Маск">🎭 Маск</option>
+              <option value="Үс арчилгаа">💇 Үс арчилгаа</option>
+              <option value="Биеийн арчилгаа">🧼 Биеийн арчилгаа</option>
+              <option value="Үнэртэн">🌺 Үнэртэн</option>
+              <option value="Багц">🎁 Багц</option>
+              <option value="Бусад">📦 Бусад</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Барааны нэр <span class="required">*</span></label>
+            <input type="text" id="product" placeholder="Жишээ: COSRX Snail 96 эссенц" required>
           </div>
           <div class="form-group">
             <label>Нийт дүн (₮) <span class="required">*</span></label>
-            <input type="number" id="totalAmount" placeholder="280000" min="0" required oninput="updateBalanceDisplay()">
+            <input type="number" id="totalAmount" placeholder="89000" min="0" required oninput="updateBalanceDisplay()">
           </div>
           <div class="form-group">
             <label>Төлсөн дүн (₮) <span style="font-size: 10px; color: var(--text-muted);">— автомат тооцоологдоно</span></label>
@@ -1879,9 +1921,9 @@
 <div id="chartTip"></div>
 
 <footer class="footer">
-  <span class="pattern">⛯</span>
-  Авлага Хянагч
-  <span class="pattern">⛯</span>
+  <span class="pattern">✿</span>
+  Гоо Сайхан — Солонгос гоо сайхны барааны дэлгүүр
+  <span class="pattern">✿</span>
 </footer>
 
 <script>
@@ -1906,6 +1948,8 @@
   let selectedLoginUserId = null;
   let failedAttempts = 0;
   let lockoutUntil = 0;
+
+  const SHOP_NAME = 'Гоо Сайхан';
 
   // ⚠️ ӨӨРИЙН Google Apps Script URL-ээ ЭНД оруулна
   const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzRUsOOwrHq8Ksf4U3FNzW6tW38uUYgfrHrbhnzSdQqnefLk3Rs9u46YTHrjPgLFLg0/exec';
@@ -2868,10 +2912,56 @@
     document.getElementById('dataTable').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
+  // --- Ангиллаар үлдэгдэл ---
+
+  function renderCategoryBreakdown() {
+    const listEl = document.getElementById('categoryList');
+    const map = new Map();
+
+    entries.forEach(e => {
+      const balance = e.totalAmount - getTotalPaid(e);
+      if (balance <= 0) return;
+      const cat = e.category || 'Бусад';
+      if (!map.has(cat)) map.set(cat, { balance: 0, count: 0 });
+      const c = map.get(cat);
+      c.balance += balance;
+      c.count++;
+    });
+
+    const cats = Array.from(map.entries()).sort((a, b) => b[1].balance - a[1].balance);
+
+    if (cats.length === 0) {
+      listEl.innerHTML = '<div class="payment-empty">Төлөгдөөгүй үлдэгдэл байхгүй байна 🎉</div>';
+      return;
+    }
+
+    const max = Math.max(...cats.map(([, v]) => v.balance), 1);
+
+    listEl.innerHTML = cats.map(([cat, v]) => {
+      const pct = Math.round((v.balance / max) * 100);
+      return `
+        <div class="aging-row" onclick="filterByCategory('${escapeHtml(cat)}')" title="Дарж шүүх">
+          <span class="aging-label">${escapeHtml(cat)}</span>
+          <div class="aging-bar-track"><div class="aging-bar" style="width:${pct}%;background:var(--primary)"></div></div>
+          <span class="aging-val">${formatCurrency(v.balance)}</span>
+          <span class="aging-cnt">${v.count} бүрт.</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function filterByCategory(cat) {
+    const sel = document.getElementById('searchCategory');
+    sel.value = sel.value === cat ? 'all' : cat;
+    renderTable();
+    document.getElementById('dataTable').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
   function renderAnalytics() {
     renderAging();
     renderMonthlyChart();
     renderTopDebtors();
+    renderCategoryBreakdown();
   }
 
   // --- Хэвлэх ---
@@ -2881,7 +2971,7 @@
     const now = new Date();
     const dateStr = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`;
     document.getElementById('printDate').textContent =
-      `Авлагын тайлан — хэвлэсэн: ${dateStr} • ${filtered.length} бүртгэл`;
+      `"${SHOP_NAME}" гоо сайхны дэлгүүр — авлагын тайлан — хэвлэсэн: ${dateStr} • ${filtered.length} бүртгэл`;
     window.print();
   }
 
@@ -2909,8 +2999,15 @@
         e.customerName.toLowerCase().includes(searchText) ||
         e.phone.includes(searchText) ||
         (e.email && e.email.toLowerCase().includes(searchText)) ||
-        e.product.toLowerCase().includes(searchText)
+        e.product.toLowerCase().includes(searchText) ||
+        (e.category && e.category.toLowerCase().includes(searchText))
       );
+    }
+
+    // Ангиллын шүүлтүүр
+    const catFilter = document.getElementById('searchCategory').value;
+    if (catFilter !== 'all') {
+      result = result.filter(e => (e.category || 'Бусад') === catFilter);
     }
 
     // Огнооны хүрээ
@@ -2956,6 +3053,7 @@
 
   function clearSearch() {
     document.getElementById('searchText').value = '';
+    document.getElementById('searchCategory').value = 'all';
     document.getElementById('searchDateRange').value = 'all';
     document.getElementById('searchAmount').value = 'all';
     renderTable();
@@ -3042,7 +3140,7 @@
             <strong>${escapeHtml(entry.customerName)}</strong>
             <span class="sub"><a class="tel-link" href="tel:${escapeHtml(entry.phone)}" title="Залгах">${escapeHtml(entry.phone)}</a>${entry.email ? ' • ' + escapeHtml(entry.email) : ''}</span>
           </td>
-          <td data-label="Бараа">${escapeHtml(entry.product)}</td>
+          <td data-label="Бараа">${escapeHtml(entry.product)}${entry.category ? `<br><span class="cat-tag">${escapeHtml(entry.category)}</span>` : ''}</td>
           <td data-label="Нийт" class="num"><span class="amount">${formatCurrency(entry.totalAmount)}</span></td>
           <td data-label="Төлсөн" class="num">
             <span class="amount amount-paid">${formatCurrency(totalPaid)}</span>
@@ -3108,11 +3206,11 @@
     applySorting(filtered);
 
     const statusLabels = { pending: 'Хүлээгдэж буй', overdue: 'Хугацаа хэтэрсэн', paid: 'Төлөгдсөн' };
-    const header = ['Огноо', 'Үйлчлүүлэгч', 'Утас', 'Имэйл', 'Бараа/Үйлчилгээ', 'Нийт дүн', 'Төлсөн', 'Үлдэгдэл', 'Эцсийн огноо', 'Статус', 'Тэмдэглэл'];
+    const header = ['Огноо', 'Үйлчлүүлэгч', 'Утас', 'Имэйл', 'Ангилал', 'Барааны нэр', 'Нийт дүн', 'Төлсөн', 'Үлдэгдэл', 'Эцсийн огноо', 'Статус', 'Тэмдэглэл'];
     const rows = filtered.map(e => {
       const paid = getTotalPaid(e);
       return [
-        e.date, e.customerName, e.phone, e.email || '', e.product,
+        e.date, e.customerName, e.phone, e.email || '', e.category || 'Бусад', e.product,
         e.totalAmount, paid, e.totalAmount - paid,
         e.dueDate, statusLabels[getStatus(e)], e.notes || ''
       ].map(csvEscape).join(',');
@@ -3207,6 +3305,7 @@
         document.getElementById('customerName').value = entry.customerName;
         document.getElementById('phone').value = entry.phone;
         document.getElementById('email').value = entry.email || '';
+        document.getElementById('category').value = entry.category || 'Бусад';
         document.getElementById('product').value = entry.product;
         document.getElementById('totalAmount').value = entry.totalAmount;
         document.getElementById('dueDate').value = entry.dueDate;
@@ -3258,6 +3357,7 @@
       customerName: document.getElementById('customerName').value.trim(),
       phone: document.getElementById('phone').value.trim(),
       email: document.getElementById('email').value.trim(),
+      category: document.getElementById('category').value,
       product: document.getElementById('product').value.trim(),
       totalAmount: parseInt(document.getElementById('totalAmount').value) || 0,
       paidAmount: totalPaid,
@@ -3383,11 +3483,11 @@
     const overdueDays = daysBetween(entry.dueDate, today);
 
     if (overdueDays > 0) {
-      return `Сайн байна уу, ${entry.customerName}. Танд ${formatCurrency(balance)} төлбөрийн үлдэгдэл байгаа бөгөөд хугацаа ${overdueDays} хоног хэтэрсэн байна (эцсийн огноо: ${due}). Та төлбөрөө барагдуулна уу. Баярлалаа.`;
+      return `Сайн байна уу, ${entry.customerName}. "${SHOP_NAME}" гоо сайхны дэлгүүрээс мэндчилж байна. Таны ${entry.product} худалдан авалтын ${formatCurrency(balance)} үлдэгдлийн хугацаа ${overdueDays} хоног хэтэрсэн байна (эцсийн огноо: ${due}). Та төлбөрөө барагдуулна уу. Баярлалаа. 🌸`;
     } else if (overdueDays === 0) {
-      return `Сайн байна уу, ${entry.customerName}. Таны ${formatCurrency(balance)} төлбөрийн эцсийн хугацаа өнөөдөр дуусна. Та төлбөрөө хийнэ үү. Баярлалаа.`;
+      return `Сайн байна уу, ${entry.customerName}. "${SHOP_NAME}" гоо сайхны дэлгүүрээс мэндчилж байна. Таны ${entry.product} худалдан авалтын ${formatCurrency(balance)} төлбөрийн эцсийн хугацаа өнөөдөр дуусна. Та төлбөрөө хийнэ үү. Баярлалаа. 🌸`;
     }
-    return `Сайн байна уу, ${entry.customerName}. Танд ${formatCurrency(balance)} төлбөрийн үлдэгдэл байна. Эцсийн хугацаа: ${due}. Баярлалаа.`;
+    return `Сайн байна уу, ${entry.customerName}. "${SHOP_NAME}" гоо сайхны дэлгүүрээс мэндчилж байна. Таны ${entry.product} худалдан авалтын ${formatCurrency(balance)} үлдэгдлийн эцсийн хугацаа: ${due}. Баярлалаа. 🌸`;
   }
 
   function sendSms(entryId) {
